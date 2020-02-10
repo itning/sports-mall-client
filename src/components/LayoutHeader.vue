@@ -24,12 +24,12 @@
           </a-col>
           <a-col :xs="0" :sm="5" :md="4" :lg="3" :xl="3">
             <a-config-provider :autoInsertSpaceInButton="false">
-              <a-button type="link">登录</a-button>
+              <a-button type="link" @click="handleLoginBtnClick">登录</a-button>
             </a-config-provider>
           </a-col>
           <a-col :xs="0" :sm="1" :md="2" :lg="4" :xl="4">
             <a-config-provider :autoInsertSpaceInButton="false">
-              <a-button type="link">注册</a-button>
+              <a-button type="link" @click="handleRegBtnClick">注册</a-button>
             </a-config-provider>
           </a-col>
         </a-row>
@@ -40,7 +40,15 @@
 
 <script>
   export default {
-    name: "LayoutHeader"
+    name: "LayoutHeader",
+    methods: {
+      handleLoginBtnClick() {
+        this.$router.push("/login");
+      },
+      handleRegBtnClick() {
+        this.$router.push("/reg");
+      }
+    }
   }
 </script>
 
