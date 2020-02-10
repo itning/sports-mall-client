@@ -2,7 +2,7 @@
   <div>
     <a-row type="flex" justify="space-between">
       <a-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
-        <div>体育用品商城</div>
+        <div class="rainbow-text">体育用品商城</div>
       </a-col>
       <a-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
         <a-input-search placeholder="搜索商品" @search="" enterButton style="vertical-align: middle;"/>
@@ -53,5 +53,24 @@
 </script>
 
 <style scoped>
+  @keyframes hue {
+    from {
+      filter: hue-rotate(0);
+    }
 
+    to {
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  .rainbow-text {
+    margin-left: 8px;
+    display: inline-block;
+    position: relative;
+    font-size: 2em;
+    color: transparent;
+    animation: hue 2s linear infinite;
+    background-image: linear-gradient(to right bottom, rgb(255,0,0), rgb(255,128,0), rgb(255,255,0), rgb(0,255,0), rgb(0,255,128), rgb(0,255,255), rgb(0,128,255), rgb(0,0,255), rgb(128,0,255), rgb(255,0,255), rgb(255,0,128));
+    -webkit-background-clip: text;
+  }
 </style>
