@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import MainIndex from "../views/MainIndex";
+import MainView from "../views/MainView";
 
 Vue.use(VueRouter);
 
@@ -7,7 +9,19 @@ const routes = [
   {
     path: '/',
     name: 'MainIndex',
-    component: () => import(/* webpackChunkName: "MainIndex" */ '../views/MainIndex.vue')
+    component: MainIndex,
+    children: [{
+      path: '',
+      components: {
+        subContent: MainView
+      }
+    },
+      {
+        path: 'search/:keyword',
+        components: {
+          subContent: () => import(/* webpackChunkName: "Search" */ '../views/Search.vue')
+        }
+      }]
   },
   {
     path: '/login',

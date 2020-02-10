@@ -5,7 +5,7 @@
         <div class="rainbow-text">体育用品商城</div>
       </a-col>
       <a-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
-        <a-input-search placeholder="搜索商品" @search="" enterButton style="vertical-align: middle;"/>
+        <a-input-search placeholder="搜索商品" @search="searchProduct" enterButton style="vertical-align: middle;"/>
       </a-col>
       <a-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
         <a-row type="flex" justify="end">
@@ -47,6 +47,13 @@
       },
       handleRegBtnClick() {
         this.$router.push("/reg");
+      },
+      searchProduct(value) {
+        if (value.trim() === "") {
+          this.$router.push("/");
+          return;
+        }
+        this.$router.push("/search/" + value);
       }
     }
   }
@@ -70,7 +77,7 @@
     font-size: 2em;
     color: transparent;
     animation: hue 2s linear infinite;
-    background-image: linear-gradient(to right bottom, rgb(255,0,0), rgb(255,128,0), rgb(255,255,0), rgb(0,255,0), rgb(0,255,128), rgb(0,255,255), rgb(0,128,255), rgb(0,0,255), rgb(128,0,255), rgb(255,0,255), rgb(255,0,128));
+    background-image: linear-gradient(to right bottom, rgb(255, 0, 0), rgb(255, 128, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 128), rgb(0, 255, 255), rgb(0, 128, 255), rgb(0, 0, 255), rgb(128, 0, 255), rgb(255, 0, 255), rgb(255, 0, 128));
     -webkit-background-clip: text;
   }
 </style>

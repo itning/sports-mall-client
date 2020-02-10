@@ -4,16 +4,8 @@
       <LayoutHeader/>
     </a-layout-header>
     <a-layout-content style="margin: 0 50px">
-      <a-layout class="box-shadow" style="padding: 24px 0; background: #fff">
-        <a-layout-sider collapsedWidth="0" style="background: #fff" v-model="collapsed">
-          <LayoutSider/>
-        </a-layout-sider>
-        <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-          <CarouselTwo/>
-        </a-layout-content>
-      </a-layout>
-      <RecommendedProducts/>
       <a-back-top/>
+      <router-view name="subContent"/>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <a-button type="link">管理员登录</a-button>
@@ -23,17 +15,12 @@
 </template>
 
 <script>
-  import RecommendedProducts from "../components/RecommendedProducts";
-  import CarouselTwo from "../components/CarouselTwo";
-  import LayoutSider from "../components/LayoutSider";
   import LayoutHeader from "../components/LayoutHeader";
 
   export default {
     name: "MainIndex",
-    components: {RecommendedProducts, CarouselTwo, LayoutSider, LayoutHeader},
-    data: () => ({collapsed: false}),
-    methods: {}
-
+    components: {LayoutHeader},
+    data: () => ({collapsed: false})
   }
 </script>
 
