@@ -13,6 +13,7 @@
         </a-layout-content>
       </a-layout>
       <RecommendedProducts/>
+      <a-back-top />
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <a-button type="link">管理员登录</a-button>
