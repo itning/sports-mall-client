@@ -54,6 +54,12 @@ const routes = [
             }
           }
         ]
+      },
+      {
+        path: 'confirm_order/:id/:count',
+        components: {
+          subContent: () => import(/* webpackChunkName: "ConfirmOrder" */ '../views/ConfirmOrder.vue')
+        }
       }
     ]
   },

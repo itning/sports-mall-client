@@ -8,7 +8,7 @@
         <div class="product-title">顺丰正常发罗技g502主宰者hero有线机械游戏鼠标专用电竞CF穿越火线LOL吃鸡宏罗技502电脑鼠标大手配重</div>
         <div class="product-price">价格：￥<span>500</span></div>
         <div>数量：
-          <a-input-number size="small" :min="1" :max="100000" :defaultValue="1" @change="onCountChange"/>
+          <a-input-number size="small" :min="1" :max="100000" :defaultValue="productCount" @change="onCountChange"/>
           <span>&nbsp;件</span>
         </div>
         <div>
@@ -19,7 +19,7 @@
           <span style="margin-left: 12px">评价：<span style="color: red">20</span></span>
         </div>
         <div>
-          <a-button type="primary">立即购买</a-button>
+          <a-button type="primary" @click="handleBuyBtnClick">立即购买</a-button>
           <a-button>加入购物车</a-button>
         </div>
       </a-col>
@@ -30,9 +30,9 @@
         <a-radio-button value="b">累计评价</a-radio-button>
       </a-radio-group>
     </div>
-   <div style="margin: 24px">
-     <router-view name="product"/>
-   </div>
+    <div style="margin: 24px">
+      <router-view name="product"/>
+    </div>
   </div>
 </template>
 
@@ -45,6 +45,7 @@
     data() {
       return {
         productId: null,
+        productCount: 1,
         imgs: [
           'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN01AWEO651Dy73roztZL_!!2494290284.jpg_430x430q90.jpg',
           'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i4/2494290284/O1CN01UQkARp1Dy73L8Dkns_!!2494290284.jpg_430x430q90.jpg',
@@ -57,15 +58,20 @@
     methods: {
       onCountChange(value) {
         console.log('changed', value);
+        this.productCount = value;
       },
       onProductRadioChange(e) {
         if (e.target.value === "a") {
           this.$router.push("/product_detail/" + this.productId).catch(err => {
-          })
+          });
         } else {
           this.$router.push("/product_detail/" + this.productId + "/comment").catch(err => {
-          })
+          });
         }
+      },
+      handleBuyBtnClick() {
+        this.$router.push(`/confirm_order/${this.productId}/${this.productCount}`).catch(err => {
+        });
       }
     },
     created() {
