@@ -34,6 +34,26 @@ const routes = [
         components: {
           subContent: () => import(/* webpackChunkName: "Cart" */ '../views/Cart.vue')
         }
+      },
+      {
+        path: 'product_detail/:id',
+        components: {
+          subContent: () => import(/* webpackChunkName: "ProductDetail" */ '../views/ProductDetail.vue')
+        },
+        children: [
+          {
+            path: '',
+            components: {
+              product: () => import(/* webpackChunkName: "ProduceDetailIntroduction" */ '../views/ProduceDetailIntroduction.vue')
+            }
+          },
+          {
+            path: 'comment',
+            components: {
+              product: () => import(/* webpackChunkName: "ProduceDetailComment" */ '../views/ProduceDetailComment.vue')
+            }
+          }
+        ]
       }
     ]
   },

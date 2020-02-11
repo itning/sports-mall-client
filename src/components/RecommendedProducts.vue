@@ -5,7 +5,7 @@
       推荐商品
     </p>
     <div class="commodity-items">
-      <CommodityItem v-for="item in data" :key="item.img" :img="item.img" :sales="item.sales" :price="item.price"
+      <CommodityItem v-for="item in data" :key="item.img" :id="item.id" :img="item.img" :sales="item.sales" :price="item.price"
                      :title="item.title"/>
       <i></i><i></i><i></i><i></i><i></i>
     </div>
@@ -21,12 +21,14 @@
     data: () => ({
       data: [
         {
+          id:"a",
           img: "https://img.alicdn.com/bao/uploaded/i4/TB1DICRMVXXXXXFXVXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
           title: "Scosche Rhythm+高精度心率检测智能手环蓝牙运动手表跑步心率表",
           price: 473,
           sales: 12
         },
         {
+          id:"b",
           img: "https://img.alicdn.com/bao/uploaded/i1/106231177/TB2VBbRnamgSKJjSsplXXaICpXa_!!106231177.jpg_200x200q90.jpg_.webp",
           title: "OPPO蓝牙耳机4.1运动跑步音乐入领夹式重低音塞华为苹果vivo通用",
           price: 69,
@@ -39,24 +41,28 @@
           sales: 91
         },
         {
+          id:"c",
           img: "https://img.alicdn.com/bao/uploaded/i4/14431894/O1CN01WBEpSM1PrUcp9BTSA_!!0-saturn_solar.jpg_200x200q90.jpg_.webp",
           title: "11 23号刀片3 4号刀柄美工刀雕刻刀剪纸刀",
           price: 29.8,
           sales: 3050
         },
         {
+          id:"c",
           img: "https://img.alicdn.com/bao/uploaded/i3/TB1Vo6yPpXXXXaaXFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
           title: "ZIDLI磁动力牛头人酋长ZM5 ZM2100网吧网咖游戏电竞LOL",
           price: 109,
           sales: 33
         },
         {
+          id:"e",
           img: "https://img.alicdn.com/bao/uploaded/i1/TB1vNW7SpXXXXaRXpXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
           title: "ZIDLI磁动力牛头人酋长ZM5 ZM2100网吧网咖游戏电竞LOL",
           price: 449,
           sales: 10
         },
         {
+          id:"f",
           img: "https://img.alicdn.com/bao/uploaded/i4/48629080/O1CN01NNTWmO2Gwgn3wsYgN_!!0-saturn_solar.jpg_200x200q90.jpg_.webp",
           title: "工业热缩枪热风枪塑料焊枪吹风机汽车贴膜",
           price: 55,

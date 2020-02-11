@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="">
+    <router-link :to="'/product_detail/'+id">
       <div class="item-box">
         <div class="item-img">
           <img :src="img" alt="">
@@ -11,13 +11,15 @@
           <a-col :span="12" class="item-sales">销量：{{sales}}</a-col>
         </a-row>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
 <script>
   export default {
     props: {
+      // ID
+      id: String,
       // 图片
       img: String,
       // 价格
