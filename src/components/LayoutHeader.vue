@@ -18,7 +18,7 @@
           </a-col>
           <a-col :xs="0" :sm="10" :md="9" :lg="6" :xl="5">
             <a-config-provider :autoInsertSpaceInButton="false">
-              <a-button type="link">
+              <a-button type="link" @click="handleCartBtnClick">
                 <a-icon type="shopping-cart"/>
                 购物车
               </a-button>
@@ -52,6 +52,9 @@
       },
       handleOrderBtnClick() {
         this.$router.push("/order").catch(err => {});
+      },
+      handleCartBtnClick(){
+        this.$router.push("/cart").catch(err => {});
       },
       searchProduct(value) {
         if (value.trim() === "") {

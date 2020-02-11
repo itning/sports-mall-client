@@ -26,4 +26,9 @@
   .box-shadow:hover {
     box-shadow: 0 1px 8px 2px #E4E4E4;
   }
+
+  /*圆角效果*/
+  .box-radius {
+    border-radius: 15px;
+  }
 </style>

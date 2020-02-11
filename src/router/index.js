@@ -28,6 +28,12 @@ const routes = [
         components: {
           subContent: () => import(/* webpackChunkName: "Order" */ '../views/Order.vue')
         }
+      },
+      {
+        path: 'cart',
+        components: {
+          subContent: () => import(/* webpackChunkName: "Cart" */ '../views/Cart.vue')
+        }
       }
     ]
   },

@@ -9,7 +9,7 @@
     <a-row class="item-content" type="flex" justify="space-around" align="middle">
       <a-col :span="2">
         <img class="item-img"
-             src="https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg"
+             :src="img"
              alt="">
       </a-col>
       <a-col :span="8" class="item-title">{{title}}</a-col>
@@ -25,6 +25,7 @@
 <script>
   export default {
     props: {
+      img: String,
       createdTime: String,
       id: String,
       status: String,
