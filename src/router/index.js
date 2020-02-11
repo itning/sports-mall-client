@@ -10,18 +10,26 @@ const routes = [
     path: '/',
     name: 'MainIndex',
     component: MainIndex,
-    children: [{
-      path: '',
-      components: {
-        subContent: MainView
-      }
-    },
+    children: [
+      {
+        path: '',
+        components: {
+          subContent: MainView
+        }
+      },
       {
         path: 'search/:keyword',
         components: {
           subContent: () => import(/* webpackChunkName: "Search" */ '../views/Search.vue')
         }
-      }]
+      },
+      {
+        path: 'order',
+        components: {
+          subContent: () => import(/* webpackChunkName: "Order" */ '../views/Order.vue')
+        }
+      }
+    ]
   },
   {
     path: '/login',

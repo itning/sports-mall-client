@@ -2,7 +2,9 @@
   <div>
     <a-row type="flex" justify="space-between">
       <a-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
-        <div class="rainbow-text">体育用品商城</div>
+        <router-link to="/">
+          <div class="rainbow-text">体育用品商城</div>
+        </router-link>
       </a-col>
       <a-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
         <a-input-search placeholder="搜索商品" @search="searchProduct" enterButton style="vertical-align: middle;"/>
@@ -11,7 +13,7 @@
         <a-row type="flex" justify="end">
           <a-col :xs="0" :sm="8" :md="7" :lg="5" :xl="4">
             <a-config-provider :autoInsertSpaceInButton="false">
-              <a-button type="link">我的订单</a-button>
+              <a-button type="link" @click="handleOrderBtnClick">我的订单</a-button>
             </a-config-provider>
           </a-col>
           <a-col :xs="0" :sm="10" :md="9" :lg="6" :xl="5">
@@ -43,17 +45,20 @@
     name: "LayoutHeader",
     methods: {
       handleLoginBtnClick() {
-        this.$router.push("/login");
+        this.$router.push("/login").catch(err => {});
       },
       handleRegBtnClick() {
-        this.$router.push("/reg");
+        this.$router.push("/reg").catch(err => {});
+      },
+      handleOrderBtnClick() {
+        this.$router.push("/order").catch(err => {});
       },
       searchProduct(value) {
         if (value.trim() === "") {
-          this.$router.push("/");
+          this.$router.push("/").catch(err => {});
           return;
         }
-        this.$router.push("/search/" + value);
+        this.$router.push("/search/" + value).catch(err => {});
       }
     }
   }
