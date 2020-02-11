@@ -137,7 +137,7 @@
   }
 
   .commodity-items > i {
-    width: 100px;
+    width: 238px;
     margin-right: 10px;
   }
 </style>
