@@ -86,7 +86,15 @@
           })
       },
       handleOrder() {
-
+        Post(API.order.add)
+          .withSuccessCode(201)
+          .withErrorStartMsg("下单失败：")
+          .withURLSearchParams({commodityId: this.productId, count: this.produceCount, address: this.address})
+          .do(response => {
+            this.$message.success("下单成功");
+            this.$router.replace("/order").catch(error => {
+            });
+          })
       }
     },
     created() {

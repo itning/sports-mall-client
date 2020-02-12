@@ -24,7 +24,7 @@
 
 <script>
   import CartItem from "../components/CartItem";
-  import {Get, Post} from "../http";
+  import {Del, Get, Post} from "../http";
   import {API} from "../api";
   import moment from "moment";
 
@@ -68,6 +68,15 @@
       },
       handleDelCart(id) {
         console.log(id);
+        Del(API.cart.del + id)
+          .withSuccessCode(204)
+          .withErrorStartMsg("购物车删除失败：")
+          .do(response => {
+            this.$message.success("删除成功");
+          })
+          .doAfter(() => {
+            this.initCartData();
+          })
       },
       initCartData() {
         Get(`${API.cart.all}?page=${this.pagination.page - 1}&size=${this.pagination.size}`)
@@ -77,6 +86,7 @@
             this.pagination.totalElements = response.data.data.totalElements;
             if (response.data.data.content.length === 0) {
               this.loading.empty = true;
+              this.data = [];
             } else {
               this.loading.empty = false;
               this.data = response.data.data.content.map(item => {

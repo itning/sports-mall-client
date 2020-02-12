@@ -19,7 +19,8 @@ export const API = {
   },
   cart: {
     add: `${SERVER_HOST}/cart`,
-    all: `${SERVER_HOST}/carts`
+    all: `${SERVER_HOST}/carts`,
+    del: `${SERVER_HOST}/cart/`
   },
   order: {
     all: `${SERVER_HOST}/orders`,
@@ -27,5 +28,6 @@ export const API = {
     pay: `${SERVER_HOST}/order/pay`,
     hip: `${SERVER_HOST}/order/hip`,
     receipt: `${SERVER_HOST}/order/receipt`,
+    add: `${SERVER_HOST}/order`
   }
 };

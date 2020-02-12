@@ -2,7 +2,14 @@
   <div class="item-box">
     <div class="item-info">
       <span>加入日期：{{time}}</span>
-      <span class="del-order" @click="handleDelCartBtn"><a-icon type="delete"/></span>
+      <a-popconfirm
+        title="确定删除该商品吗？"
+        @confirm="handleDelCartBtn"
+        okText="确定"
+        cancelText="取消"
+      >
+        <span class="del-order"><a-icon type="delete"/></span>
+      </a-popconfirm>
     </div>
     <a-row class="item-content" type="flex" justify="space-around" align="middle">
       <a-col :span="2">
@@ -17,13 +24,23 @@
       </a-col>
       <a-col :span="4">金额：￥{{totalPrice}}</a-col>
       <a-col :span="3">
-        <a-button type="link" @click="handleBuyBtnClick">立即购买</a-button>
+        <a-popconfirm
+          title="确定下订单吗（会删除购物车物品）？"
+          @confirm="handleBuyBtnClick"
+          okText="确定"
+          cancelText="取消"
+        >
+          <a-button type="link">立即购买</a-button>
+        </a-popconfirm>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
+  import {Del} from "../http";
+  import {API} from "../api";
+
   export default {
     props: {
       id: String,
@@ -47,8 +64,13 @@
     },
     methods: {
       handleBuyBtnClick() {
-        this.$router.push(`/confirm_order/${this.id}/${this.syncCount}`).catch(error => {
-        })
+        Del(API.cart.del + this.id)
+          .withSuccessCode(204)
+          .withErrorStartMsg("购物车删除失败：")
+          .do(response => {
+            this.$router.push(`/confirm_order/${this.id}/${this.syncCount}`).catch(error => {
+            })
+          })
       },
       onCountChange(value) {
         this.syncCount = value;
