@@ -1,31 +1,42 @@
 <template>
   <div class="order-box box-shadow box-radius">
     <div class="order-radio">
-      <a-radio-group defaultValue="a" buttonStyle="solid">
-        <a-radio-button value="a">所有订单</a-radio-button>
-        <a-radio-button value="b">待付款</a-radio-button>
-        <a-radio-button value="c">待发货</a-radio-button>
-        <a-radio-button value="d">待收货</a-radio-button>
-        <a-radio-button value="e">待评价</a-radio-button>
+      <a-radio-group defaultValue="all" buttonStyle="solid" @change="handleRadioBtnChange">
+        <a-radio-button value="all">所有订单</a-radio-button>
+        <a-radio-button value="1">待付款</a-radio-button>
+        <a-radio-button value="2">待发货</a-radio-button>
+        <a-radio-button value="3">待收货</a-radio-button>
+        <a-radio-button value="4">待评价</a-radio-button>
       </a-radio-group>
     </div>
-    <div>
-      <OrderItem v-for="item in data" :key="item.id" :created-time="item.createdTime" :img="item.img" :id="item.id"
-                 :status="item.status" :title="item.title" :count="item.count" :price="item.price"/>
-    </div>
-    <div class="order-pagination">
-      <a-pagination showSizeChanger
-                    @showSizeChange="onShowSizeChange"
-                    :defaultCurrent="3"
-                    :total="500"
+    <a-empty v-if="loading.empty"/>
+    <div v-if="!loading.empty">
+      <div>
+        <OrderItem v-for="item in data" :key="item.id" :created-time="item.time" :img="item.commodity.imgMain"
+                   :id="item.id"
+                   :status="item.status" :title="item.commodity.name" :count="item.countNum"
+                   :price="item.commodity.price"/>
+      </div>
+      <div class="order-pagination">
+        <a-pagination showSizeChanger
+                      @showSizeChange="onShowSizeChange"
+                      @change="onPageChange"
+                      :total="pagination.totalElements"
 
-      />
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import OrderItem from "../components/OrderItem";
+  import {Get} from "../http";
+  import {API} from "../api";
+  import moment from "moment";
+  import 'moment/locale/zh-cn';
+
+  moment.locale('zh-cn');
 
   export default {
     name: "Order",
@@ -33,76 +44,61 @@
     data: () => ({
       pageSize: 20,
       current: 4,
-      data: [
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "2313132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "23113132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "231311132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "42313111132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "32313111132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "22313111132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-        {
-          img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-          createdTime: "2019年12月01日",
-          id: "12313111132",
-          status: "已发货",
-          title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-          count: 1,
-          price: 200
-        },
-      ]
+      data: [],
+      pagination: {
+        // 数据总数
+        totalElements: 0,
+        // 页码
+        page: 1,
+        // 每页数量
+        size: 10,
+        // 订单状态
+        status: ''
+      },
+      loading: {
+        empty: false
+      }
     }),
     methods: {
-      onShowSizeChange(current, pageSize) {
-        console.log(current, pageSize);
+      handleRadioBtnChange(e) {
+        if (e.target.value === "all") {
+          this.pagination.status = "";
+        } else {
+          this.pagination.status = e.target.value;
+        }
+        this.initAllOrders();
       },
+      onShowSizeChange(current, pageSize) {
+        this.pagination.page = current;
+        this.pagination.size = pageSize;
+        this.initAllOrders();
+      },
+      onPageChange(page, pageSize) {
+        this.pagination.page = page;
+        this.pagination.size = pageSize;
+        this.initAllOrders();
+      },
+      initAllOrders() {
+        Get(`${API.order.all}?page=${this.pagination.page - 1}&size=${this.pagination.size}&status=${this.pagination.status}`)
+          .withSuccessCode(200)
+          .withErrorStartMsg("获取订单信息失败：")
+          .do(response => {
+            this.pagination.totalElements = response.data.data.totalElements;
+            if (response.data.data.content.length === 0) {
+              this.loading.empty = true;
+              this.data = [];
+            } else {
+              this.loading.empty = false;
+              this.data = response.data.data.content.map(item => {
+                item.time = moment(item.gmtModified).format("YYYY年MM月DD日 HH:mm:ss");
+                return item;
+              });
+            }
+          })
+      }
+    },
+    created() {
+      this.initAllOrders();
     }
   }
 </script>

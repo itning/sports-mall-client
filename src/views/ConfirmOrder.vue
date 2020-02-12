@@ -27,13 +27,13 @@
       <a-textarea placeholder="在此填写收货地址" autosize :read-only="addressReadOnly" ref="addressTextarea" v-model="address"/>
     </div>
     <div class="confirm-btn">
-      <a-button type="primary">立即下单</a-button>
+      <a-button type="primary" @click="handleOrder" :loading="loading.order">立即下单</a-button>
     </div>
   </div>
 </template>
 
 <script>
-  import {Get, Patch} from "../http";
+  import {Get, Patch, Post} from "../http";
   import {API} from "../api";
 
   export default {
@@ -46,8 +46,13 @@
         produceCount: null,
         // 收货地址框只读
         addressReadOnly: true,
+        // 商品数据
         productData: {},
-        address: ''
+        // 收货地址
+        address: '',
+        loading: {
+          order: false
+        }
       }
     },
     methods: {
@@ -79,6 +84,9 @@
           .watchError(errorResponse => {
             this.router.back();
           })
+      },
+      handleOrder() {
+
       }
     },
     created() {
