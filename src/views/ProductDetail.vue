@@ -5,18 +5,17 @@
         <ProductDetailCarousel :imgs="imgs"/>
       </a-col>
       <a-col :span="14" class="product-info">
-        <div class="product-title">顺丰正常发罗技g502主宰者hero有线机械游戏鼠标专用电竞CF穿越火线LOL吃鸡宏罗技502电脑鼠标大手配重</div>
-        <div class="product-price">价格：￥<span>500</span></div>
+        <div class="product-title">{{productData.name}}</div>
+        <div class="product-price">价格：￥<span>{{productData.price}}</span></div>
         <div>数量：
           <a-input-number size="small" :min="1" :max="100000" :defaultValue="productCount" @change="onCountChange"/>
           <span>&nbsp;件</span>
         </div>
         <div>
-          <span>库存：<span style="color: red">2062</span></span>
+          <span>库存：<span style="color: red">{{productData.stock}}</span></span>
         </div>
         <div>
-          <span>销量：<span style="color: red">50</span></span>
-          <span style="margin-left: 12px">评价：<span style="color: red">20</span></span>
+          <span>销量：<span style="color: red">{{productData.sales}}</span></span>
         </div>
         <div>
           <a-button type="primary" @click="handleBuyBtnClick">立即购买</a-button>
@@ -38,6 +37,8 @@
 
 <script>
   import ProductDetailCarousel from "../components/ProductDetailCarousel";
+  import {Get} from "../http";
+  import {API} from "../api";
 
   export default {
     name: "ProductDetail",
@@ -46,13 +47,8 @@
       return {
         productId: null,
         productCount: 1,
-        imgs: [
-          'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN01AWEO651Dy73roztZL_!!2494290284.jpg_430x430q90.jpg',
-          'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i4/2494290284/O1CN01UQkARp1Dy73L8Dkns_!!2494290284.jpg_430x430q90.jpg',
-          'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN0104kw6y1Dy73sTVFFj_!!2494290284.jpg_430x430q90.jpg',
-          'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN018G90Ut1Dy73D6mBvy_!!2494290284.jpg_430x430q90.jpg',
-          'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN01Iw1HqP1Dy73LsTjlY_!!2494290284.jpg_430x430q90.jpg'
-        ]
+        imgs: [],
+        productData: {}
       }
     },
     methods: {
@@ -68,14 +64,31 @@
           this.$router.push("/product_detail/" + this.productId + "/comment").catch(err => {
           });
         }
+        window.scrollTo(0,0);
       },
       handleBuyBtnClick() {
         this.$router.push(`/confirm_order/${this.productId}/${this.productCount}`).catch(err => {
         });
+      },
+      initProductDetail() {
+        Get(API.commodity.one + this.productId)
+          .withSuccessCode(200)
+          .withErrorStartMsg("商品加载失败；")
+          .do(response => {
+            this.productData = response.data.data;
+            this.imgs = this.productData.imgSecond.split(";");
+          })
+          .doAfter(() => {
+
+          })
+          .watchError(errorResponse => {
+            this.router.back();
+          })
       }
     },
     created() {
       this.productId = this.$route.params.id;
+      this.initProductDetail();
     },
     beforeRouteUpdate(to, from, next) {
       this.productId = to.params.id;

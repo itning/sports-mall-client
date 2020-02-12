@@ -14,7 +14,8 @@
     name: "LayoutSider",
     methods: {
       handleTypeBtnClick(id) {
-        this.$router.push("/product_type/" + id);
+        this.$router.push("/product_type/" + id).catch(err => {
+        });
       }
     }
   }
