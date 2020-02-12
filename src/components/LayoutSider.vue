@@ -1,6 +1,6 @@
 <template>
   <a-menu mode="vertical">
-    <a-menu-item v-for="item in data" :key="item.id">
+    <a-menu-item v-for="item in data" :key="item.id" @click="handleTypeBtnClick(item.id)">
       {{item.name}}
     </a-menu-item>
   </a-menu>
@@ -12,6 +12,11 @@
       data: Array
     },
     name: "LayoutSider",
+    methods: {
+      handleTypeBtnClick(id) {
+        this.$router.push("/product_type/" + id);
+      }
+    }
   }
 </script>
 
