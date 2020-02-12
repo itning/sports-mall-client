@@ -14,7 +14,8 @@ export const API = {
     commodityDetail: `${SERVER_HOST}/commodityDetail/`
   },
   comment: {
-    all: `${SERVER_HOST}/comment/`
+    all: `${SERVER_HOST}/comment/`,
+    add: `${SERVER_HOST}/comment`
   },
   cart: {
     add: `${SERVER_HOST}/cart`,

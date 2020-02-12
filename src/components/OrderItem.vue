@@ -23,7 +23,14 @@
       <a-col :span="4">数量：{{count}}</a-col>
       <a-col :span="4">单价：￥{{price}}</a-col>
       <a-col :span="4">
-        <a-button type="link" :disabled="status===5||status===2">{{btnText}}</a-button>
+        <a-popconfirm
+          title="确认操作？"
+          @confirm="handleBtnClick"
+          okText="确认"
+          cancelText="取消"
+        >
+          <a :disabled="status===5||status===2">{{btnText}}</a>
+        </a-popconfirm>
       </a-col>
     </a-row>
   </div>
@@ -86,6 +93,9 @@
       handleDelOrderBtn() {
         console.log("del: " + this.id);
         this.$emit("delOrder", this.id);
+      },
+      handleBtnClick() {
+        this.$emit("ok", {id: this.id, status: this.status});
       }
     }
   }

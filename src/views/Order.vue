@@ -16,7 +16,7 @@
                    :id="item.id"
                    :status="item.status" :title="item.commodity.name" :count="item.countNum"
                    :price="item.commodity.price"
-                   @delOrder="delOrder"/>
+                   @delOrder="delOrder" @ok="handleNextStatus"/>
       </div>
       <div class="order-pagination">
         <a-pagination showSizeChanger
@@ -27,12 +27,15 @@
         />
       </div>
     </div>
+    <a-modal title="评价商品" v-model="comment.visible" :confirmLoading="comment.confirmLoading" @ok="handleNewComment">
+      <a-textarea placeholder="在此评论..." :rows="4" v-model="comment.newComment"/>
+    </a-modal>
   </div>
 </template>
 
 <script>
   import OrderItem from "../components/OrderItem";
-  import {Del, Get} from "../http";
+  import {Del, Get, Post} from "../http";
   import {API} from "../api";
   import moment from "moment";
   import 'moment/locale/zh-cn';
@@ -46,6 +49,15 @@
       pageSize: 20,
       current: 4,
       data: [],
+      comment: {
+        // 评价模态框
+        visible: false,
+        confirmLoading: false,
+        // 新评论内容
+        newComment: '',
+        // 评论ID
+        id: null
+      },
       pagination: {
         // 数据总数
         totalElements: 0,
@@ -105,6 +117,69 @@
             this.$message.success('删除成功');
           })
           .doAfter(() => {
+            this.initAllOrders();
+          })
+      },
+      handleNextStatus(o) {
+        if (o.status !== 1 && o.status !== 3 && o.status !== 4) {
+          return;
+        }
+        switch (o.status) {
+          case 1: {
+            this.pay(o.id);
+            break;
+          }
+          case 3: {
+            this.receipt(o.id);
+            break;
+          }
+          case 4: {
+            this.comment.id = o.id;
+            this.comment.visible = true;
+            break;
+          }
+        }
+      },
+      pay(id) {
+        console.log("pay" + id);
+        Post(API.order.pay)
+          .withSuccessCode(201)
+          .withURLSearchParams({orderId: id})
+          .do(response => {
+            this.$message.success('付款成功');
+          })
+          .doAfter(() => {
+            this.initAllOrders();
+          })
+      },
+      receipt(id) {
+        console.log("receipt" + id);
+        Post(API.order.receipt)
+          .withSuccessCode(201)
+          .withURLSearchParams({orderId: id})
+          .do(response => {
+            this.$message.success('收货成功');
+          })
+          .doAfter(() => {
+            this.initAllOrders();
+          })
+      },
+      handleNewComment() {
+        if (this.comment.newComment.trim() === '') {
+          this.$message.error("必须填写内容");
+          return;
+        }
+        this.comment.confirmLoading = true;
+        Post(API.comment.add)
+          .withSuccessCode(201)
+          .withErrorStartMsg("评论失败：")
+          .withURLSearchParams({orderId: this.comment.id, content: this.comment.newComment})
+          .do(response => {
+            this.$message.success("评论成功");
+            this.comment.visible = false;
+          })
+          .doAfter(() => {
+            this.comment.confirmLoading = false;
             this.initAllOrders();
           })
       }
