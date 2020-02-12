@@ -1,7 +1,7 @@
 <template>
   <div class="item-box">
     <div class="item-info">
-      <span>加入日期：2020年12月1日 12:32</span>
+      <span>加入日期：{{time}}</span>
       <span class="del-order" @click="handleDelCartBtn"><a-icon type="delete"/></span>
     </div>
     <a-row class="item-content" type="flex" justify="space-around" align="middle">
@@ -15,8 +15,8 @@
       <a-col :span="5">数量：
         <a-input-number size="small" :min="1" :max="100000" :defaultValue="count" @change="onCountChange"/>
       </a-col>
-      <a-col :span="3">金额：￥{{totalPrice}}</a-col>
-      <a-col :span="4">
+      <a-col :span="4">金额：￥{{totalPrice}}</a-col>
+      <a-col :span="3">
         <a-button type="link">立即购买</a-button>
       </a-col>
     </a-row>
@@ -26,10 +26,12 @@
 <script>
   export default {
     props: {
+      id: String,
       img: String,
       title: String,
       price: Number,
-      count: Number
+      count: Number,
+      time: String
     },
     name: "CartItem",
     data() {
@@ -40,16 +42,16 @@
     },
     computed: {
       totalPrice: function () {
-        return this.syncCount * this.price;
+        return (this.syncCount * this.price).toFixed(2);
       }
     },
     methods: {
       onCountChange(value) {
-        console.log('changed', value);
         this.syncCount = value;
+        this.$emit("countChange", {id: this.id, value: value});
       },
-      handleDelCartBtn(){
-
+      handleDelCartBtn() {
+        this.$emit("delCart", this.id);
       }
     }
   }

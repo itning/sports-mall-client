@@ -3,21 +3,30 @@
     <div class="cart-info">
       <span>购物车 商品数量：{{data.length}}</span>
     </div>
-    <CartItem v-for="item in data" :key="item.id" :img="item.img" :title="item.title" :price="item.price"
-              :count="item.count"/>
-    <div class="cart-pagination">
-      <a-pagination showSizeChanger
-                    @showSizeChange="onShowSizeChange"
-                    :defaultCurrent="3"
-                    :total="500"
+    <a-empty v-if="loading.empty"/>
+    <div v-if="!loading.empty">
+      <CartItem v-for="item in data" :key="item.id" :id="item.commodity.id" :img="item.commodity.imgMain"
+                :title="item.commodity.name"
+                :price="item.commodity.price"
+                :count="item.countNum" :time="item.time" @countChange="handleCountChange"
+                @delCart="handleDelCart"/>
+      <div class="cart-pagination">
+        <a-pagination showSizeChanger
+                      @showSizeChange="onShowSizeChange"
+                      @change="onPageChange"
+                      :total="pagination.totalElements"
 
-      />
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import CartItem from "../components/CartItem";
+  import {Get, Post} from "../http";
+  import {API} from "../api";
+  import moment from "moment";
 
   export default {
     name: "Cart",
@@ -25,70 +34,61 @@
     data: () => ({
         pageSize: 20,
         current: 4,
-        data: [
-          {
-            id: "001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "a001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "b001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "q001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "w001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "e001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "r001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-          {
-            id: "zz001",
-            img: "https://img.alicdn.com/imgextra/i3/3055237276/O1CN01ki2s9c23cSKAXx1AW_!!3055237276.jpg_80x80.jpg",
-            title: "【年货价】裤流秋冬季百搭束长裤潮牌",
-            price: 10,
-            count: 3
-          },
-        ]
+        pagination: {
+          // 数据总数
+          totalElements: 0,
+          // 页码
+          page: 1,
+          // 每页数量
+          size: 10
+        },
+        data: [],
+        loading: {empty: false}
       }
     ),
     methods: {
       onShowSizeChange(current, pageSize) {
-        console.log(current, pageSize);
+        this.pagination.page = current;
+        this.pagination.size = pageSize;
+        this.initProduceDetailComment();
       },
+      onPageChange(page, pageSize) {
+        this.pagination.page = page;
+        this.pagination.size = pageSize;
+        this.initProduceDetailComment();
+      },
+      handleCountChange(value) {
+        Post(API.cart.add)
+          .withURLSearchParams({commodityId: value.id, num: value.value, cumulative: false})
+          .withSuccessCode(201)
+          .withErrorStartMsg("操作失败：")
+          .withOnceErrorToast(true)
+          .do(response => {
+          })
+      },
+      handleDelCart(id) {
+        console.log(id);
+      },
+      initCartData() {
+        Get(`${API.cart.all}?page=${this.pagination.page - 1}&size=${this.pagination.size}`)
+          .withSuccessCode(200)
+          .withErrorStartMsg("加载购物车数据失败：")
+          .do(response => {
+            this.pagination.totalElements = response.data.data.totalElements;
+            if (response.data.data.content.length === 0) {
+              this.loading.empty = true;
+            } else {
+              this.loading.empty = false;
+              this.data = response.data.data.content.map(item => {
+                item.time = moment(item.gmtCreate).format("YYYY年MM月DD日 HH:mm:ss");
+                return item;
+              });
+            }
+          })
+      }
+    },
+    created() {
+      this.initCartData();
     }
   }
 </script>

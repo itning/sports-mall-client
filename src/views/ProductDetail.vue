@@ -19,7 +19,7 @@
         </div>
         <div>
           <a-button type="primary" @click="handleBuyBtnClick">立即购买</a-button>
-          <a-button>加入购物车</a-button>
+          <a-button @click="handleAddToCartBtnClick">加入购物车</a-button>
         </div>
       </a-col>
     </a-row>
@@ -37,7 +37,7 @@
 
 <script>
   import ProductDetailCarousel from "../components/ProductDetailCarousel";
-  import {Get} from "../http";
+  import {Get, Post} from "../http";
   import {API} from "../api";
 
   export default {
@@ -64,7 +64,7 @@
           this.$router.push("/product_detail/" + this.productId + "/comment").catch(err => {
           });
         }
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
       },
       handleBuyBtnClick() {
         this.$router.push(`/confirm_order/${this.productId}/${this.productCount}`).catch(err => {
@@ -83,6 +83,42 @@
           })
           .watchError(errorResponse => {
             this.router.back();
+          })
+      },
+      handleAddToCartBtnClick() {
+        Post(API.cart.add)
+          .withURLSearchParams({commodityId: this.productId, num: this.productCount})
+          .withSuccessCode(201)
+          .withErrorStartMsg("加入失败：")
+          .withOnceErrorToast(true)
+          .do(response => {
+            const key = `open${Date.now()}`;
+            this.$notification.open({
+              message: '加入成功',
+              description:
+                `购物车有${response.data.data.countNum}件该商品`,
+              btn: h => {
+                return h(
+                  'a-button',
+                  {
+                    props: {
+                      type: 'primary',
+                      size: 'small',
+                    },
+                    on: {
+                      click: () => {
+                        this.$notification.close(key);
+                        this.$router.push("/cart").catch(err => {
+                        });
+                      },
+                    },
+                  },
+                  '打开购物车',
+                );
+              },
+              key,
+              onClose: close,
+            });
           })
       }
     },

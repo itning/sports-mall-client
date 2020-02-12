@@ -14,5 +14,9 @@ export const API = {
   },
   comment: {
     all: `${SERVER_HOST}/comment/`
+  },
+  cart: {
+    add: `${SERVER_HOST}/cart`,
+    all: `${SERVER_HOST}/carts`
   }
 };

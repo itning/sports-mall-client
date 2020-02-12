@@ -42,9 +42,7 @@
           // 页码
           page: 1,
           // 每页数量
-          size: 10,
-          // 排序
-          sort: 'gmtModified'
+          size: 10
         },
         loading: {
           empty: false
@@ -63,7 +61,7 @@
         this.initProduceDetailComment();
       },
       initProduceDetailComment() {
-        Get(API.comment.all + this.productId)
+        Get(`${API.comment.all}${this.productId}?page=${this.pagination.page - 1}&size=${this.pagination.size}`)
           .withSuccessCode(200)
           .withErrorStartMsg("加载评论失败：")
           .do(response => {
