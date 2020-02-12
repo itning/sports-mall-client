@@ -15,7 +15,8 @@
         <OrderItem v-for="item in data" :key="item.id" :created-time="item.time" :img="item.commodity.imgMain"
                    :id="item.id"
                    :status="item.status" :title="item.commodity.name" :count="item.countNum"
-                   :price="item.commodity.price"/>
+                   :price="item.commodity.price"
+                   @delOrder="delOrder"/>
       </div>
       <div class="order-pagination">
         <a-pagination showSizeChanger
@@ -31,7 +32,7 @@
 
 <script>
   import OrderItem from "../components/OrderItem";
-  import {Get} from "../http";
+  import {Del, Get} from "../http";
   import {API} from "../api";
   import moment from "moment";
   import 'moment/locale/zh-cn';
@@ -94,6 +95,17 @@
                 return item;
               });
             }
+          })
+      },
+      delOrder(id) {
+        Del(API.order.del + id)
+          .withSuccessCode(204)
+          .withErrorStartMsg("删除失败：")
+          .do(response => {
+            this.$message.success('删除成功');
+          })
+          .doAfter(() => {
+            this.initAllOrders();
           })
       }
     },

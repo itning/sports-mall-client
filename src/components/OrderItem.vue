@@ -4,7 +4,14 @@
       <span>创建日期：{{createdTime}}</span>
       <span>订单号：{{id}}</span>
       <span>订单状态：{{statusCN}}</span>
-      <span class="del-order" @click="handleDelOrderBtn"><a-icon type="delete"/></span>
+      <a-popconfirm
+        title="确定删除该订单吗？"
+        @confirm="handleDelOrderBtn"
+        okText="确定"
+        cancelText="取消"
+      >
+        <span class="del-order"><a-icon type="delete"/></span>
+      </a-popconfirm>
     </div>
     <a-row class="item-content" type="flex" justify="space-around" align="middle">
       <a-col :span="2">
@@ -16,13 +23,14 @@
       <a-col :span="4">数量：{{count}}</a-col>
       <a-col :span="4">单价：￥{{price}}</a-col>
       <a-col :span="4">
-        <a-button type="link" :disabled="status===5">{{btnText}}</a-button>
+        <a-button type="link" :disabled="status===5||status===2">{{btnText}}</a-button>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
+
   export default {
     props: {
       img: String,
@@ -50,7 +58,7 @@
             return "待评价";
           }
           case 5: {
-            return "完成订单";
+            return "订单已完成";
           }
         }
       },
@@ -60,7 +68,7 @@
             return "立即付款";
           }
           case 2: {
-            return "确认收货";
+            return "等待发货";
           }
           case 3: {
             return "确认收货";
@@ -69,7 +77,7 @@
             return "评价商品";
           }
           case 5: {
-            return "完成订单";
+            return "订单已完成";
           }
         }
       }
@@ -77,6 +85,7 @@
     methods: {
       handleDelOrderBtn() {
         console.log("del: " + this.id);
+        this.$emit("delOrder", this.id);
       }
     }
   }

@@ -21,6 +21,10 @@ export const API = {
     all: `${SERVER_HOST}/carts`
   },
   order: {
-    all: `${SERVER_HOST}/orders`
+    all: `${SERVER_HOST}/orders`,
+    del: `${SERVER_HOST}/order/`,
+    pay: `${SERVER_HOST}/order/pay`,
+    hip: `${SERVER_HOST}/order/hip`,
+    receipt: `${SERVER_HOST}/order/receipt`,
   }
 };
