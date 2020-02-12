@@ -17,7 +17,7 @@
       </a-col>
       <a-col :span="4">金额：￥{{totalPrice}}</a-col>
       <a-col :span="3">
-        <a-button type="link">立即购买</a-button>
+        <a-button type="link" @click="handleBuyBtnClick">立即购买</a-button>
       </a-col>
     </a-row>
   </div>
@@ -46,6 +46,10 @@
       }
     },
     methods: {
+      handleBuyBtnClick() {
+        this.$router.push(`/confirm_order/${this.id}/${this.syncCount}`).catch(error => {
+        })
+      },
       onCountChange(value) {
         this.syncCount = value;
         this.$emit("countChange", {id: this.id, value: value});

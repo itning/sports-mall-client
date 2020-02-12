@@ -4,11 +4,11 @@
     <a-row type="flex" justify="space-around" align="middle">
       <a-col :span="2">
         <img class="confirm-img"
-             src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2494290284/O1CN01AWEO651Dy73roztZL_!!2494290284.jpg_430x430q90.jpg"
+             :src="productData.imgMain"
              alt="">
       </a-col>
       <a-col :span="10">
-        顺丰正常发罗技g502主宰者hero有线机械游戏鼠标专用电竞CF穿越火线LOL吃鸡宏罗技502电脑鼠标大手配重
+        {{productData.name}}
       </a-col>
       <a-col :span="5">
         <p>数量：
@@ -16,7 +16,7 @@
                           @change="onCountChange"/>
         </p>
       </a-col>
-      <a-col :span="5"><p>价格：￥400</p></a-col>
+      <a-col :span="5"><p>单价：￥{{productData.price}}</p></a-col>
     </a-row>
     <div class="confirm-address-box">
       <p>收货地址：
@@ -24,7 +24,7 @@
           <a-button type="link" @click="handleModifyAddress">{{addressReadOnly?'修改':'保存'}}</a-button>
         </a-config-provider>
       </p>
-      <a-textarea placeholder="在此填写收货地址" autosize :readonly="addressReadOnly" ref="addressTextarea"/>
+      <a-textarea placeholder="在此填写收货地址" autosize :read-only="addressReadOnly" ref="addressTextarea" v-model="address"/>
     </div>
     <div class="confirm-btn">
       <a-button type="primary">立即下单</a-button>
@@ -33,6 +33,9 @@
 </template>
 
 <script>
+  import {Get, Patch} from "../http";
+  import {API} from "../api";
+
   export default {
     name: "ConfirmOrder",
     data() {
@@ -42,7 +45,9 @@
         // 商品购买数量
         produceCount: null,
         // 收货地址框只读
-        addressReadOnly: true
+        addressReadOnly: true,
+        productData: {},
+        address: ''
       }
     },
     methods: {
@@ -51,15 +56,36 @@
         this.produceCount = value;
       },
       handleModifyAddress() {
+        this.addressReadOnly = !this.addressReadOnly;
         if (this.addressReadOnly) {
+          Patch(API.user.modify)
+            .withSuccessCode(204)
+            .withErrorStartMsg("修改地址失败：")
+            .withJSONData({address: this.address})
+            .do(response => {
+              this.$message.success('保存成功');
+            })
+        } else {
           this.$refs.addressTextarea.focus();
         }
-        this.addressReadOnly = !this.addressReadOnly;
+      },
+      initProductDetail() {
+        Get(API.commodity.one + this.productId)
+          .withSuccessCode(200)
+          .withErrorStartMsg("商品加载失败；")
+          .do(response => {
+            this.productData = response.data.data;
+          })
+          .watchError(errorResponse => {
+            this.router.back();
+          })
       }
     },
     created() {
       this.productId = this.$route.params.id;
       this.produceCount = this.$route.params.count;
+      this.initProductDetail();
+      this.address = this.$user.loginUser().address;
     }
   }
 </script>

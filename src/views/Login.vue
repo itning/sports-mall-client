@@ -49,6 +49,7 @@
 <script>
   import {Post} from "../http";
   import {API} from "../api";
+  import {LOCAL_STORAGE_KEY} from "../user";
 
   export default {
     name: "Login",
@@ -71,7 +72,7 @@
               .withErrorStartMsg("登陆失败：")
               .do(response => {
                 console.log(response.data.data);
-                window.localStorage.setItem('authorization_token', response.data.data);
+                window.localStorage.setItem(LOCAL_STORAGE_KEY, response.data.data);
                 let location = this.$store.state.now_path;
                 if (location === "") {
                   location = window.location.protocol + '//' + window.location.host;
