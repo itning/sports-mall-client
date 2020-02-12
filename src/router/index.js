@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from '../store'
 import MainIndex from "../views/MainIndex";
 import MainView from "../views/MainView";
 
@@ -88,6 +89,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+});
+
+router.afterEach((to, from) => {
+  if (to.path === "/login") {
+    return;
+  }
+  Vuex.state.now_path = to.path;
 });
 
 export default router

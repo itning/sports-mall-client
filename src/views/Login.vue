@@ -15,7 +15,7 @@
         <a-form-item>
           <a-input
             v-decorator="[
-          'userName',
+          'username',
           { rules: [{ required: true, message: '请输入用户名' }] },
         ]"
             placeholder="用户名"
@@ -37,7 +37,7 @@
         </a-form-item>
         <a-form-item>
           <router-link to="/forget_pwd" class="login-form-forgot">忘记密码</router-link>
-          <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
+          <a-button :loading="loading.login" type="primary" html-type="submit" class="login-form-button">登录</a-button>
           <router-link to="/reg">立即注册！</router-link>
           <router-link to="/" style="float: right">返回主页</router-link>
         </a-form-item>
@@ -47,17 +47,40 @@
 </template>
 
 <script>
+  import {Post} from "../http";
+  import {API} from "../api";
+
   export default {
     name: "Login",
     data: () => ({
-      backgroudImage: "url('https://gw.alicdn.com/tfs/TB1mdCTvoT1gK0jSZFrXXcNCXXa-2500-600.png')"
+      backgroudImage: "url('https://gw.alicdn.com/tfs/TB1mdCTvoT1gK0jSZFrXXcNCXXa-2500-600.png')",
+      loading: {
+        login: false
+      }
     }),
     methods: {
       handleSubmit(e) {
         e.preventDefault();
         this.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+            this.loading.login = true;
+            Post(API.user.login)
+              .withSuccessCode(200)
+              .withURLSearchParams(values)
+              .withOnceErrorToast(true)
+              .withErrorStartMsg("登陆失败：")
+              .do(response => {
+                console.log(response.data.data);
+                window.localStorage.setItem('authorization_token', response.data.data);
+                let location = this.$store.state.now_path;
+                if (location === "") {
+                  location = window.location.protocol + '//' + window.location.host;
+                }
+                window.location.href = location;
+              })
+              .doAfter(() => {
+                this.loading.login = false;
+              })
           }
         });
       },
