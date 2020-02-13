@@ -1,11 +1,10 @@
 <template>
-  <div>content</div>
+  <div>商品</div>
 </template>
 
 <script>
   export default {
-    name: "AdminView",
-
+    name: "AdminProduct"
   }
 </script>
 
