@@ -2,7 +2,9 @@ export const SERVER_HOST = "http://localhost:8888";
 export const API = {
   user: {
     login: `${SERVER_HOST}/login`,
-    modify: `${SERVER_HOST}/user`
+    modify: `${SERVER_HOST}/user`,
+    reg: `${SERVER_HOST}/reg`,
+    pwd: `${SERVER_HOST}/pwd`
   },
   commodityType: {
     all: `${SERVER_HOST}/commodity_types`

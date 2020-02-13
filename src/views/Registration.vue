@@ -98,7 +98,7 @@
           />
         </a-form-item>
         <a-form-item v-bind="tailFormItemLayout">
-          <a-button type="primary" html-type="submit">注册</a-button>
+          <a-button type="primary" html-type="submit" :loading="loading">注册</a-button>
           <a-button html-type="button" @click="handleReturnClick" style="margin-left: 8px">返回</a-button>
         </a-form-item>
       </a-form>
@@ -107,10 +107,14 @@
 </template>
 
 <script>
+  import {Post} from "../http";
+  import {API} from "../api";
+
   export default {
     name: "Registration",
     data() {
       return {
+        loading: false,
         regStatusIndex: 0,
         confirmDirty: false,
         formItemLayout: {
@@ -142,7 +146,24 @@
         e.preventDefault();
         this.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+            this.loading = true;
+            Post(API.user.reg)
+              .withSuccessCode(201)
+              .withErrorStartMsg("注册失败：")
+              .withURLSearchParams({
+                username: values.username,
+                email: values.email,
+                phone: values.phone,
+                password: values.password
+              })
+              .do(response => {
+                this.$message.success("注册成功");
+                this.$router.push("/login").catch(error => {
+                })
+              })
+              .doAfter(() => {
+                this.loading = false;
+              })
           }
         });
       },

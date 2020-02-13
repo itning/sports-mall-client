@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Vuex from '../store'
 import MainIndex from "../views/MainIndex";
 import MainView from "../views/MainView";
+import {LOCAL_STORAGE_KEY} from "../user";
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,12 @@ const routes = [
         components: {
           subContent: () => import(/* webpackChunkName: "ConfirmOrder" */ '../views/ConfirmOrder.vue')
         }
+      },
+      {
+        path: 'personal',
+        components: {
+          subContent: () => import(/* webpackChunkName: "Personal" */ '../views/Personal.vue')
+        }
       }
     ]
   },
@@ -97,8 +104,25 @@ const router = new VueRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login" ||
+    to.path === "/reg" ||
+    to.path === "/" ||
+    to.path === '/forget_pwd') {
+    next();
+    return;
+  }
+  if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
+    next("/login");
+  } else {
+    next();
+  }
+});
+
 router.afterEach((to, from) => {
-  if (to.path === "/login") {
+  if (to.path === "/login" ||
+    to.path === "/reg" ||
+    to.path === "/forget_pwd") {
     return;
   }
   Vuex.state.now_path = to.path;

@@ -5,12 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    now_path: '',
+    now_path: ''
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  mutations: {},
+  actions: {},
+  modules: {}
 })
