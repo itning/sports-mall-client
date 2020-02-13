@@ -1,0 +1,141 @@
+<template>
+  <div class="item-box">
+    <div class="item-info">
+      <span>创建日期：{{createdTime}}</span>
+      <span>订单号：{{id}}</span>
+      <span>订单状态：{{statusCN}}</span>
+      <a-popconfirm
+        title="确定删除该订单吗？"
+        @confirm="handleDelOrderBtn"
+        okText="确定"
+        cancelText="取消"
+      >
+        <span class="del-order"><a-icon type="delete"/></span>
+      </a-popconfirm>
+    </div>
+    <a-row class="item-content" type="flex" justify="space-around" align="middle">
+      <a-col :span="2">
+        <img class="item-img"
+             :src="img"
+             alt="">
+      </a-col>
+      <a-col :span="8" class="item-title">{{title}}</a-col>
+      <a-col :span="4">数量：{{count}}</a-col>
+      <a-col :span="4">单价：￥{{price}}</a-col>
+      <a-col :span="4">
+        <a-popconfirm
+          title="确认操作？"
+          @confirm="handleBtnClick"
+          okText="确认"
+          cancelText="取消"
+        >
+          <a :disabled="status!==2">{{btnText}}</a>
+        </a-popconfirm>
+      </a-col>
+    </a-row>
+  </div>
+</template>
+
+<script>
+
+  export default {
+    props: {
+      img: String,
+      createdTime: String,
+      id: String,
+      status: Number,
+      title: String,
+      count: Number,
+      price: Number
+    },
+    name: "AdminOrderItem",
+    computed: {
+      statusCN: function () {
+        switch (this.status) {
+          case 1: {
+            return "已下单";
+          }
+          case 2: {
+            return "待发货";
+          }
+          case 3: {
+            return "待收货";
+          }
+          case 4: {
+            return "待评价";
+          }
+          case 5: {
+            return "订单已完成";
+          }
+        }
+      },
+      btnText: function () {
+        switch (this.status) {
+          case 1: {
+            return "等待付款";
+          }
+          case 2: {
+            return "立即发货";
+          }
+          case 3: {
+            return "等待确认收货";
+          }
+          case 4: {
+            return "等待评价商品";
+          }
+          case 5: {
+            return "订单已完成";
+          }
+        }
+      }
+    },
+    methods: {
+      handleDelOrderBtn() {
+        console.log("del: " + this.id);
+        this.$emit("delOrder", this.id);
+      },
+      handleBtnClick() {
+        this.$emit("ok", {id: this.id, status: this.status});
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .item-box {
+    margin-top: 12px;
+    border: 2px solid #f1f1f1;
+  }
+
+  .item-content {
+    margin: 12px 3px;
+  }
+
+  .item-title {
+    font-size: 0.9em;
+  }
+
+  .item-info {
+    background-color: #f1f1f1;
+    padding: 6px;
+    margin-bottom: 12px;
+  }
+
+  .item-info span {
+    color: black;
+    margin-right: 12px;
+  }
+
+  .item-img {
+    max-width: 100%;
+  }
+
+  .del-order {
+    float: right;
+    cursor: pointer;
+  }
+
+  .del-order:hover {
+    color: #1890ff;
+  }
+</style>

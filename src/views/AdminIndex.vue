@@ -23,7 +23,7 @@
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
-    <a-layout>
+    <a-layout style="background-color: white">
       <a-layout-header style="background: #f9fffd; padding: 0">
         <p style="margin-left: 24px">管理员端</p>
       </a-layout-header>

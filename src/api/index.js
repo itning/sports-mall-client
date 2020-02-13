@@ -34,7 +34,8 @@ export const API = {
     pay: `${SERVER_HOST}/order/pay`,
     hip: `${SERVER_HOST}/order/hip`,
     receipt: `${SERVER_HOST}/order/receipt`,
-    add: `${SERVER_HOST}/order`
+    add: `${SERVER_HOST}/order`,
+    admin_all: `${SERVER_HOST}/orders/admin`
   },
   carousel: {
     all: `${SERVER_HOST}/carousels`,
