@@ -7,7 +7,10 @@ export const API = {
     pwd: `${SERVER_HOST}/pwd`
   },
   commodityType: {
-    all: `${SERVER_HOST}/commodity_types`
+    all: `${SERVER_HOST}/commodity_types`,
+    modify: `${SERVER_HOST}/commodity_type`,
+    del: `${SERVER_HOST}/commodity_type/`,
+    add: `${SERVER_HOST}/commodity_type`
   },
   commodity: {
     type: `${SERVER_HOST}/commodity/type`,
@@ -34,6 +37,9 @@ export const API = {
     add: `${SERVER_HOST}/order`
   },
   carousel: {
-    all: `${SERVER_HOST}/carousels`
+    all: `${SERVER_HOST}/carousels`,
+    add: `${SERVER_HOST}/carousel`,
+    del: `${SERVER_HOST}/carousel/`,
+    modify: `${SERVER_HOST}/carousel`
   }
 };

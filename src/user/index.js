@@ -1,8 +1,19 @@
 import {Base64} from 'js-base64';
+
 export const LOCAL_STORAGE_KEY = 'authorization_token';
 let User = {};
 
-User.loginUser=function() {
+export function analyze(token) {
+  try {
+    return JSON.parse(JSON.parse(
+      Base64.decode(token.split('.')[1])
+    ).loginUser);
+  } catch (e) {
+    return {};
+  }
+}
+
+User.loginUser = function () {
   if (window.localStorage.getItem(LOCAL_STORAGE_KEY) === null) {
     return {};
   }

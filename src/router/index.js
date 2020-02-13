@@ -3,14 +3,14 @@ import VueRouter from 'vue-router'
 import Vuex from '../store'
 import MainIndex from "../views/MainIndex";
 import MainView from "../views/MainView";
-import {LOCAL_STORAGE_KEY} from "../user";
+import User, {LOCAL_STORAGE_KEY} from "../user";
+import AdminIndex from "../views/AdminIndex";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'MainIndex',
     component: MainIndex,
     children: [
       {
@@ -78,6 +78,30 @@ const routes = [
     ]
   },
   {
+    path: '/admin',
+    component: AdminIndex,
+    children: [
+      {
+        path: 'productType',
+        components: {
+          subContent: () => import(/* webpackChunkName: "AdminProductType" */ '../views/AdminProductType.vue')
+        }
+      },
+      {
+        path: 'carousel',
+        components: {
+          subContent: () => import(/* webpackChunkName: "AdminCarousel" */ '../views/AdminCarousel.vue')
+        }
+      },
+      {
+        path: 'order',
+        components: {
+          subContent: () => import(/* webpackChunkName: "AdminOrder" */ '../views/AdminOrder.vue')
+        }
+      }
+    ],
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
@@ -105,6 +129,21 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  if (to.path.startsWith("/admin")) {
+    if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
+      next("/login");
+    } else {
+      if (User.loginUser().role.id === '1') {
+        next();
+      } else {
+        next('/login');
+      }
+    }
+    return;
+  }
+  if (localStorage.getItem(LOCAL_STORAGE_KEY) && User.loginUser().role.id === '1') {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+  }
   if (to.path === "/login" ||
     to.path === "/reg" ||
     to.path === "/" ||

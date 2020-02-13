@@ -8,7 +8,7 @@
       <router-view name="subContent"/>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
-      <a-button type="link">管理员登录</a-button>
+      <a-button type="link" @click="handleAdminBtnClick">管理员登录</a-button>
       <div>© 2020-现在 基于Web的体育用品销售系统的设计与实现 哈尔滨信息工程学院 毕业项目</div>
     </a-layout-footer>
   </a-layout>
@@ -20,7 +20,13 @@
   export default {
     name: "MainIndex",
     components: {LayoutHeader},
-    data: () => ({collapsed: false})
+    data: () => ({collapsed: false}),
+    methods: {
+      handleAdminBtnClick() {
+        this.$router.push("/admin").catch(error => {
+        });
+      }
+    }
   }
 </script>
 

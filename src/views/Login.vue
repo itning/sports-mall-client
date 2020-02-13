@@ -49,7 +49,7 @@
 <script>
   import {Post} from "../http";
   import {API} from "../api";
-  import {LOCAL_STORAGE_KEY} from "../user";
+  import {analyze, LOCAL_STORAGE_KEY} from "../user";
 
   export default {
     name: "Login",
@@ -72,12 +72,18 @@
               .withErrorStartMsg("登陆失败：")
               .do(response => {
                 console.log(response.data.data);
-                window.localStorage.setItem(LOCAL_STORAGE_KEY, response.data.data);
-                let location = this.$store.state.now_path;
-                if (location === "") {
-                  location = window.location.protocol + '//' + window.location.host;
+                const roleId = analyze(response.data.data).role.id;
+                if (roleId === '1') {
+                  window.localStorage.setItem(LOCAL_STORAGE_KEY, response.data.data);
+                  window.location.href = window.location.protocol + '//' + window.location.host + "/admin";
+                } else {
+                  window.localStorage.setItem(LOCAL_STORAGE_KEY, response.data.data);
+                  let location = this.$store.state.now_path;
+                  if (location === "") {
+                    location = window.location.protocol + '//' + window.location.host;
+                  }
+                  window.location.href = location;
                 }
-                window.location.href = location;
               })
               .doAfter(() => {
                 this.loading.login = false;
