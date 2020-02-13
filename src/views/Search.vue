@@ -1,32 +1,39 @@
 <template>
   <div class="search-box">
-    <p class="search-info">搜索 ”{{keyword}}“ 耗时 0.025ms</p>
-    <div style="height: 40px;padding-left: 12px">
-      <a-radio-group defaultValue="a" buttonStyle="solid">
-        <a-radio-button value="a">综合排序</a-radio-button>
-        <a-radio-button value="b">销量排序</a-radio-button>
-        <a-radio-button value="c">价格从高到低排序</a-radio-button>
-        <a-radio-button value="d">价格从低到高排序</a-radio-button>
-      </a-radio-group>
-    </div>
-    <div class="commodity-items">
-      <CommodityItem v-for="item in data" :key="item.title" :img="item.img" :sales="item.sales" :price="item.price"
-                     :title="item.title"/>
-      <i></i><i></i><i></i><i></i><i></i>
-    </div>
-    <div class="search-pagination">
-      <a-pagination showSizeChanger
-                    @showSizeChange="onShowSizeChange"
-                    :defaultCurrent="3"
-                    :total="500"
+    <p class="search-info">搜索 ”{{keyword}}“ 共有{{data.length}}件</p>
+    <a-empty v-if="loading.empty"/>
+    <div v-if="!loading.empty">
+      <div style="height: 40px;padding-left: 12px">
+        <a-radio-group defaultValue="gmtModified" buttonStyle="solid" @change="handleSortRadioChange">
+          <a-radio-button value="gmtModified">综合排序</a-radio-button>
+          <a-radio-button value="sales,desc">销量排序</a-radio-button>
+          <a-radio-button value="price,desc">价格从高到低排序</a-radio-button>
+          <a-radio-button value="price">价格从低到高排序</a-radio-button>
+        </a-radio-group>
+      </div>
+      <div class="commodity-items">
+        <CommodityItem v-for="item in data" :key="item.id" :id="item.id" :img="item.imgMain" :sales="item.sales"
+                       :price="item.price"
+                       :title="item.name"/>
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="search-pagination">
+        <a-pagination showSizeChanger
+                      @showSizeChange="onShowSizeChange"
+                      @change="onPageChange"
+                      :total="pagination.totalElements"
 
-      />
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import CommodityItem from "../components/CommodityItem";
+  import {Get} from "../http";
+  import {API} from "../api";
+  import moment from "moment";
 
   export default {
     name: "Search",
@@ -34,70 +41,60 @@
     data() {
       return {
         keyword: null,
-        pageSize: 20,
-        current: 4,
-        data: [
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i4/TB1DICRMVXXXXXFXVXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
-            title: "1Scosche Rhythm+高精度心率检测智能手环蓝牙运动手表跑步心率表",
-            price: 473,
-            sales: 12
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i1/106231177/TB2VBbRnamgSKJjSsplXXaICpXa_!!106231177.jpg_200x200q90.jpg_.webp",
-            title: "2OPPO蓝牙耳机4.1运动跑步音乐入领夹式重低音塞华为苹果vivo通用",
-            price: 69,
-            sales: 4
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i1/12637022208057892/T1NpypXvxXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
-            title: "5包邮 瑞斯漫 电脑手托架鼠标护腕垫手臂托架手托板桌/椅两用",
-            price: 3.5,
-            sales: 91
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i4/14431894/O1CN01WBEpSM1PrUcp9BTSA_!!0-saturn_solar.jpg_200x200q90.jpg_.webp",
-            title: "411 23号刀片3 4号刀柄美工刀雕刻刀剪纸刀",
-            price: 29.8,
-            sales: 3050
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i3/TB1Vo6yPpXXXXaaXFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
-            title: "3ZIDLI磁动力牛头人酋长ZM5 ZM2100网吧网咖游戏电竞LOL",
-            price: 109,
-            sales: 33
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i1/TB1vNW7SpXXXXaRXpXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
-            title: "7ZIDLI磁动力牛头人酋长ZM5 ZM2100网吧网咖游戏电竞LOL",
-            price: 449,
-            sales: 10
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i4/48629080/O1CN01NNTWmO2Gwgn3wsYgN_!!0-saturn_solar.jpg_200x200q90.jpg_.webp",
-            title: "8工业热缩枪热风枪塑料焊枪吹风机汽车贴膜",
-            price: 55,
-            sales: 66
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i1/12637022208057892/T1NpypXvxXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp",
-            title: "9包邮 瑞斯漫 电脑手托架鼠标护腕垫手臂托架手托板桌/椅两用",
-            price: 3.5,
-            sales: 91
-          },
-          {
-            img: "https://img.alicdn.com/bao/uploaded/i4/14431894/O1CN01WBEpSM1PrUcp9BTSA_!!0-saturn_solar.jpg_200x200q90.jpg_.webp",
-            title: "011 23号刀片3 4号刀柄美工刀雕刻刀剪纸刀",
-            price: 29.8,
-            sales: 3050
-          },
-        ]
+        pagination: {
+          // 数据总数
+          totalElements: 0,
+          // 页码
+          page: 1,
+          // 每页数量
+          size: 10,
+          // 排序
+          sort: 'gmtModified'
+        },
+        loading: {
+          empty: false
+        },
+        data: []
+      }
+    },
+    watch: {
+      keyword: function () {
+        this.initProduceData();
       }
     },
     methods: {
-      onShowSizeChange(current, pageSize) {
-        console.log(current, pageSize);
+      handleSortRadioChange(e) {
+        this.pagination.sort = e.target.value;
+        this.initProduceData();
       },
+      onShowSizeChange(current, pageSize) {
+        this.pagination.page = current;
+        this.pagination.size = pageSize;
+        this.initProduceData();
+      },
+      onPageChange(page, pageSize) {
+        this.pagination.page = page;
+        this.pagination.size = pageSize;
+        this.initProduceData();
+      },
+      initProduceData() {
+        Get(`${API.commodity.search}${this.keyword}?page=${this.pagination.page - 1}&size=${this.pagination.size}&sort=${this.pagination.sort}`)
+          .withSuccessCode(200)
+          .withErrorStartMsg("搜索失败：")
+          .do(response => {
+            this.pagination.totalElements = response.data.data.totalElements;
+            if (response.data.data.content.length === 0) {
+              this.loading.empty = true;
+              this.data = [];
+            } else {
+              this.loading.empty = false;
+              this.data = response.data.data.content.map(item => {
+                item.time = moment(item.gmtModified).format("YYYY年MM月DD日 HH:mm:ss");
+                return item;
+              });
+            }
+          })
+      }
     },
     created() {
       this.keyword = this.$route.params.keyword;
@@ -112,6 +109,7 @@
 <style scoped>
   .search-box {
     background-color: #fff;
+    min-height: 200px;
   }
 
   .search-info {

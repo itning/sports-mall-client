@@ -11,7 +11,8 @@ export const API = {
     type: `${SERVER_HOST}/commodity/type`,
     recommend: `${SERVER_HOST}/commodity/recommends`,
     one: `${SERVER_HOST}/commodity/one/`,
-    commodityDetail: `${SERVER_HOST}/commodityDetail/`
+    commodityDetail: `${SERVER_HOST}/commodityDetail/`,
+    search: `${SERVER_HOST}/commodity/search/`
   },
   comment: {
     all: `${SERVER_HOST}/comment/`,
