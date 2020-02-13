@@ -17,7 +17,9 @@ export const API = {
     recommend: `${SERVER_HOST}/commodity/recommends`,
     one: `${SERVER_HOST}/commodity/one/`,
     commodityDetail: `${SERVER_HOST}/commodityDetail/`,
-    search: `${SERVER_HOST}/commodity/search/`
+    search: `${SERVER_HOST}/commodity/search/`,
+    admin_all: `${SERVER_HOST}/commodity/admin`,
+    admin_modify: `${SERVER_HOST}/commodity/admin`
   },
   comment: {
     all: `${SERVER_HOST}/comment/`,
