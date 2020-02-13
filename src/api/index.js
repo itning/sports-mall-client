@@ -32,5 +32,8 @@ export const API = {
     hip: `${SERVER_HOST}/order/hip`,
     receipt: `${SERVER_HOST}/order/receipt`,
     add: `${SERVER_HOST}/order`
+  },
+  carousel: {
+    all: `${SERVER_HOST}/carousels`
   }
 };
