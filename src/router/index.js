@@ -104,6 +104,12 @@ const routes = [
         components: {
           subContent: () => import(/* webpackChunkName: "AdminProduct" */ '../views/AdminProduct.vue')
         }
+      },
+      {
+        path: 'product_new',
+        components: {
+          subContent: () => import(/* webpackChunkName: "AdminProductNew" */ '../views/AdminProductNew.vue')
+        }
       }
     ],
   },

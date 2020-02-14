@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>商品共计：{{pagination.totalElements}}
-      <a-button type="link">新增商品</a-button>
+      <a-button type="link" @click="$router.push('/admin/product_new').catch(error=>{})">新增商品</a-button>
     </p>
     <AdminProductItem v-for="item in data" :key="item.id" :id="item.id" :img="item.imgMain" :title="item.name"
                       :time="item.time" :price="item.price" :stock="item.stock" :type="item.commodityType"

@@ -20,7 +20,8 @@ export const API = {
     search: `${SERVER_HOST}/commodity/search/`,
     admin_all: `${SERVER_HOST}/commodity/admin`,
     admin_modify: `${SERVER_HOST}/commodity/admin`,
-    admin_modify_detail: `${SERVER_HOST}/commodityDetail`
+    admin_modify_detail: `${SERVER_HOST}/commodityDetail`,
+    admin_add: `${SERVER_HOST}/commodity/admin`
   },
   comment: {
     all: `${SERVER_HOST}/comment/`,
