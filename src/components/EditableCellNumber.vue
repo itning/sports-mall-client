@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="editable">
-      <a-input-number id="inputNumber" v-model="value" @pressEnter="check"  @change="handleChange" style="width: 90%"/>
+      <a-input-number v-model="value" :step="step" @pressEnter="check" @change="handleChange" style="width: 90%"/>
       <a-icon style="margin-left: 12px" type="check" @click="check"/>
     </div>
     <div v-else>
@@ -13,6 +13,7 @@
 <script>
   export default {
     props: {
+      step: Number,
       text: String,
     },
     name: "EditableCellNumber",

@@ -22,17 +22,17 @@
         <EditableCell :text="title" @change="handleChange($event,'name')"/>
       </a-col>
       <a-col :span="4">单价：￥
-        <EditableCellNumber :text="String(price)" @change="handleChange($event,'price')"/>
+        <EditableCellNumber :step="0.01" :text="String(price)" @change="handleChange($event,'price')"/>
       </a-col>
       <a-col :span="3">库存：
-        <EditableCellNumber :text="String(stock)" @change="handleChange($event,'stock')"/>
+        <EditableCellNumber :step="1" :text="String(stock)" @change="handleChange($event,'stock')"/>
       </a-col>
       <a-col :span="3">分类：
         <EditableCellSelect :text="type.id" :s="type.name" :values="productTyped"
                             @change="handleChange($event,'commodityType')"/>
       </a-col>
       <a-col :span="3">
-        <a-button type="link">修改商品</a-button>
+        <a-button type="link" @click="handleModify">修改商品</a-button>
       </a-col>
     </a-row>
   </div>
@@ -75,6 +75,9 @@
       },
       handleChange(value, index) {
         this.$emit('change', {id: this.id, key: index, value: value});
+      },
+      handleModify() {
+        this.$emit("btnClick", this.id)
       }
     }
   }

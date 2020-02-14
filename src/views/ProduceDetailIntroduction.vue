@@ -26,7 +26,7 @@
           .withSuccessCode(200)
           .withErrorStartMsg("加载详情失败：")
           .do(response => {
-            if (response.data.data.detail === null) {
+            if (response.data.data.detail === null || response.data.data.detail === '') {
               this.detail = "<h1>暂无详情</h1>";
             } else {
               this.detail = response.data.data.detail;
