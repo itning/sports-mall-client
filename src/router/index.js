@@ -82,6 +82,10 @@ const routes = [
     component: AdminIndex,
     children: [
       {
+        path:'',
+        redirect: 'product'
+      },
+      {
         path: 'productType',
         components: {
           subContent: () => import(/* webpackChunkName: "AdminProductType" */ '../views/AdminProductType.vue')
