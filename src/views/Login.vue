@@ -54,7 +54,7 @@
   export default {
     name: "Login",
     data: () => ({
-      backgroudImage: "url('https://gw.alicdn.com/tfs/TB1mdCTvoT1gK0jSZFrXXcNCXXa-2500-600.png')",
+      backgroudImage: "url('./background.jpeg')",
       loading: {
         login: false
       }
@@ -108,6 +108,7 @@
   }
 
   .login-form {
+    opacity: 0.9;
     position: absolute;
     bottom: 185px;
     right: 80px;
