@@ -36,7 +36,7 @@
           </a-input>
         </a-form-item>
         <a-form-item>
-          <router-link to="/forget_pwd" class="login-form-forgot">忘记密码</router-link>
+          <!--<router-link to="/forget_pwd" class="login-form-forgot">忘记密码</router-link>-->
           <a-button :loading="loading.login" type="primary" html-type="submit" class="login-form-button">登录</a-button>
           <router-link to="/reg">立即注册！</router-link>
           <router-link to="/" style="float: right">返回主页</router-link>

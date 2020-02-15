@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  // MEMO: This view not developed and ready to remove this feature.
   export default {
     name: "ForgetPassword",
     data() {
