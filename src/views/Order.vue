@@ -15,7 +15,7 @@
         <OrderItem v-for="item in data" :key="item.id" :created-time="item.time" :img="item.commodity.imgMain"
                    :id="item.id"
                    :status="item.status" :title="item.commodity.name" :count="item.countNum"
-                   :price="item.commodity.price"
+                   :price="item.commodity.price" :sumPrice="item.sumPrice"
                    @delOrder="delOrder" @ok="handleNextStatus"/>
       </div>
       <div class="order-pagination">

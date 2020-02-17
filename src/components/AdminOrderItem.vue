@@ -20,8 +20,11 @@
              alt="">
       </a-col>
       <a-col :span="8" class="item-title">{{title}}</a-col>
-      <a-col :span="4">数量：{{count}}</a-col>
-      <a-col :span="4">单价：￥{{price}}</a-col>
+      <a-col :span="3">数量：{{count}}</a-col>
+      <a-col :span="4">总价：￥
+        <EditableCellNumber v-if="status===1" :text="String(sumPrice)" :step="0.01" @change="handlePriceChange"/>
+        <span v-else>{{sumPrice}}</span>
+      </a-col>
       <a-col :span="4">
         <a-popconfirm
           title="确认操作？"
@@ -38,7 +41,10 @@
 
 <script>
 
+  import EditableCellNumber from "./EditableCellNumber";
+
   export default {
+    components: {EditableCellNumber},
     props: {
       img: String,
       createdTime: String,
@@ -46,7 +52,8 @@
       status: Number,
       title: String,
       count: Number,
-      price: Number
+      price: Number,
+      sumPrice: Number
     },
     name: "AdminOrderItem",
     computed: {
@@ -96,6 +103,9 @@
       },
       handleBtnClick() {
         this.$emit("ok", {id: this.id, status: this.status});
+      },
+      handlePriceChange(value) {
+        this.$emit("changePrice", {id: this.id, newPrice: value});
       }
     }
   }

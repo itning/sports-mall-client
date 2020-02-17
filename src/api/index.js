@@ -39,7 +39,8 @@ export const API = {
     hip: `${SERVER_HOST}/order/hip`,
     receipt: `${SERVER_HOST}/order/receipt`,
     add: `${SERVER_HOST}/order`,
-    admin_all: `${SERVER_HOST}/orders/admin`
+    admin_all: `${SERVER_HOST}/orders/admin`,
+    admin_modify_price: `${SERVER_HOST}/order/price`
   },
   carousel: {
     all: `${SERVER_HOST}/carousels`,

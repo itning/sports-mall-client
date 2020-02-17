@@ -21,7 +21,7 @@
       </a-col>
       <a-col :span="8" class="item-title">{{title}}</a-col>
       <a-col :span="4">数量：{{count}}</a-col>
-      <a-col :span="4">单价：￥{{price}}</a-col>
+      <a-col :span="4">总价：￥{{sumPrice}}</a-col>
       <a-col :span="4">
         <a-popconfirm
           title="确认操作？"
@@ -46,7 +46,8 @@
       status: Number,
       title: String,
       count: Number,
-      price: Number
+      price: Number,
+      sumPrice: Number
     },
     name: "OrderItem",
     computed: {

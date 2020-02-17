@@ -15,8 +15,8 @@
         <AdminOrderItem v-for="item in data" :key="item.id" :created-time="item.time" :img="item.commodity.imgMain"
                         :id="item.id"
                         :status="item.status" :title="item.commodity.name" :count="item.countNum"
-                        :price="item.commodity.price"
-                        @delOrder="delOrder" @ok="handleNextStatus"/>
+                        :price="item.commodity.price" :sumPrice="item.sumPrice"
+                        @delOrder="delOrder" @ok="handleNextStatus" @changePrice="handleChangePrice"/>
       </div>
       <div class="order-pagination">
         <a-pagination showSizeChanger
@@ -137,13 +137,28 @@
         Post(API.order.hip)
           .withSuccessCode(201)
           .withErrorStartMsg("发货失败：")
-          .withURLSearchParams({orderId: this.expressInformation.id, expressInformation: this.expressInformation.newHip})
+          .withURLSearchParams({
+            orderId: this.expressInformation.id,
+            expressInformation: this.expressInformation.newHip
+          })
           .do(response => {
             this.$message.success("发货成功");
             this.expressInformation.visible = false;
           })
           .doAfter(() => {
             this.expressInformation.confirmLoading = false;
+            this.initAllOrders();
+          })
+      },
+      handleChangePrice(obj) {
+        Post(API.order.admin_modify_price)
+          .withSuccessCode(201)
+          .withErrorStartMsg("修改总价失败：")
+          .withURLSearchParams(obj)
+          .do(response => {
+            this.$message.success("修改总价成功");
+          })
+          .doAfter(() => {
             this.initAllOrders();
           })
       }

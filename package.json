@@ -1,6 +1,6 @@
 {
   "name": "sports-mall-client",
-  "version": "1.0.0-RELEASE",
+  "version": "1.0.1-RELEASE",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
