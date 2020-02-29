@@ -155,7 +155,6 @@ class _request {
     return this;
   };
 
-
   withFormData(params, enableUploadProgress = true, uploadProgress) {
     let formData = new FormData();
     for (let p in params) {
