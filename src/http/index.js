@@ -8,9 +8,15 @@ function showErrorToast(title, data) {
   if (once) {
     return;
   }
+  let msg;
+  if (typeof data === "string") {
+    msg = data;
+  } else {
+    msg = data.msg;
+  }
   Vue.prototype.$notification['error']({
     message: title,
-    description: data.msg,
+    description: msg,
     duration: 4.5,
     onClose: () => {
       once = false;

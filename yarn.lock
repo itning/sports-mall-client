@@ -829,10 +829,10 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@itning/axios-helper@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.npm.taobao.org/@itning/axios-helper/download/@itning/axios-helper-1.0.3.tgz#28a53bf0e9a303a004c42ddc1bffa7c06fe5772a"
-  integrity sha1-KKU78OmjA6AExC3cG/+nwG/ldyo=
+"@itning/axios-helper@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/@itning/axios-helper/-/axios-helper-1.0.4.tgz#2d0654aab931ad480d7d6fcb1a9ab3ca17a731ce"
+  integrity sha512-6XjDMldMyfu62E+5CCsN3hndC5jiHx/HCiXcjcppLXui9ez2xz7TQYP5kHgCzM8QjS7j0TVcrt7FCwc4/FTnQg==
   dependencies:
     axios "^0.19.2"
 
