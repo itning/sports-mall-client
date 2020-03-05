@@ -36,7 +36,7 @@
 
 <script>
   import OrderItem from "../components/OrderItem";
-  import {Del, Get, Post} from "../http";
+  import {Delete, Get, Post} from "@itning/axios-helper";
   import {API} from "../api";
   import moment from "moment";
   import 'moment/locale/zh-cn';
@@ -112,7 +112,7 @@
           })
       },
       delOrder(id) {
-        Del(API.order.del + id)
+        Delete(API.order.del + id)
           .withSuccessCode(204)
           .withErrorStartMsg("删除失败：")
           .do(response => {

@@ -42,7 +42,7 @@
 
 <script>
   import AdminProductItem from "../components/AdminProductItem";
-  import {Get, Patch} from "../http";
+  import {Get, Patch} from "@itning/axios-helper";
   import {API} from "../api";
   import moment from "moment";
   import 'moment/locale/zh-cn';

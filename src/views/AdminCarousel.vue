@@ -41,7 +41,7 @@
 </template>
 
 <script>
-  import {Del, Get, Patch, Post} from "../http";
+  import {Delete, Get, Patch, Post} from "@itning/axios-helper";
   import {API} from "../api";
   import EditableCell from "../components/EditableCell";
   import EditableCellSelect from "../components/EditableCellSelect";
@@ -119,7 +119,7 @@
           })
       },
       onDelete(key) {
-        Del(API.carousel.del + key)
+        Delete(API.carousel.del + key)
           .withSuccessCode(204)
           .withErrorStartMsg("删除失败：")
           .do(response => {

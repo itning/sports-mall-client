@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import {Del} from "../http";
+  import {Delete} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {
@@ -64,7 +64,7 @@
     },
     methods: {
       handleBuyBtnClick() {
-        Del(API.cart.del + this.id)
+        Delete(API.cart.del + this.id)
           .withSuccessCode(204)
           .withErrorStartMsg("购物车删除失败：")
           .do(response => {

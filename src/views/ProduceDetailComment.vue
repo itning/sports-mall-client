@@ -20,7 +20,7 @@
 
 <script>
   import CommentItem from "../components/CommentItem";
-  import {Get} from "../http";
+  import {Get} from "@itning/axios-helper";
   import {API} from "../api";
   import moment from "moment";
   import 'moment/locale/zh-cn';

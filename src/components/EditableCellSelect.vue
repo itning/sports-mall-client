@@ -2,7 +2,7 @@
   <div>
     <div v-if="editable">
       <a-select :defaultValue="value" style="width: 80%" @change="handleChange">
-        <a-select-option v-for="v in values" :value="v.value">{{v.name}}</a-select-option>
+        <a-select-option v-for="(v,k) in values" :key="k" :value="v.value">{{v.name}}</a-select-option>
       </a-select>
       <a-icon style="margin-left: 12px" type="check" @click="check"/>
     </div>

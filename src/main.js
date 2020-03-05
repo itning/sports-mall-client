@@ -5,6 +5,7 @@ import store from './store'
 import User from "./user";
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
+import "./http"
 
 Vue.config.productionTip = false;
 Vue.use(Antd);

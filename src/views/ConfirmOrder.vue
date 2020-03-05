@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import {Get, Patch, Post} from "../http";
+  import {Get, Patch, Post} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {
@@ -81,8 +81,8 @@
           .do(response => {
             this.productData = response.data.data;
           })
-          .watchError(errorResponse => {
-            this.router.back();
+          .withErrorHandle(errorResponse => {
+            this.$router.back();
           })
       },
       handleOrder() {

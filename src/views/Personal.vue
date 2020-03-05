@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import {Patch, Post} from "../http";
+  import {Patch, Post} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {

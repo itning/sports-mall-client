@@ -142,7 +142,7 @@
 </template>
 
 <script>
-  import {Get, Post} from "../http";
+  import {Get, Post} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {

@@ -829,6 +829,13 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@itning/axios-helper@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/@itning/axios-helper/download/@itning/axios-helper-1.0.3.tgz#28a53bf0e9a303a004c42ddc1bffa7c06fe5772a"
+  integrity sha1-KKU78OmjA6AExC3cG/+nwG/ldyo=
+  dependencies:
+    axios "^0.19.2"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

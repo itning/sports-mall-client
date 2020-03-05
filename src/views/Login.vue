@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import {Post} from "../http";
+  import {Post} from "@itning/axios-helper";
   import {API} from "../api";
   import {analyze, LOCAL_STORAGE_KEY} from "../user";
 
@@ -68,7 +68,6 @@
             Post(API.user.login)
               .withSuccessCode(200)
               .withURLSearchParams(values)
-              .withOnceErrorToast(true)
               .withErrorStartMsg("登陆失败：")
               .do(response => {
                 console.log(response.data.data);

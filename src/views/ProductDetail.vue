@@ -37,7 +37,7 @@
 
 <script>
   import ProductDetailCarousel from "../components/ProductDetailCarousel";
-  import {Get, Post} from "../http";
+  import {Get, Post} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {
@@ -81,8 +81,8 @@
           .doAfter(() => {
 
           })
-          .watchError(errorResponse => {
-            this.router.back();
+          .withErrorHandle(errorResponse => {
+            this.$router.back();
           })
       },
       handleAddToCartBtnClick() {
@@ -90,7 +90,6 @@
           .withURLSearchParams({commodityId: this.productId, num: this.productCount})
           .withSuccessCode(201)
           .withErrorStartMsg("加入失败：")
-          .withOnceErrorToast(true)
           .do(response => {
             const key = `open${Date.now()}`;
             this.$notification.open({

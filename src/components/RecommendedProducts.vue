@@ -18,7 +18,7 @@
 
 <script>
   import CommodityItem from "./CommodityItem";
-  import {Get} from "../http";
+  import {Get} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {

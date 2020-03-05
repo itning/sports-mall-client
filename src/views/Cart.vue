@@ -24,7 +24,7 @@
 
 <script>
   import CartItem from "../components/CartItem";
-  import {Del, Get, Post} from "../http";
+  import {Delete, Get, Post} from "@itning/axios-helper";
   import {API} from "../api";
   import moment from "moment";
 
@@ -62,13 +62,12 @@
           .withURLSearchParams({commodityId: value.id, num: value.value, cumulative: false})
           .withSuccessCode(201)
           .withErrorStartMsg("操作失败：")
-          .withOnceErrorToast(true)
           .do(response => {
           })
       },
       handleDelCart(id) {
         console.log(id);
-        Del(API.cart.del + id)
+        Delete(API.cart.del + id)
           .withSuccessCode(204)
           .withErrorStartMsg("购物车删除失败：")
           .do(response => {

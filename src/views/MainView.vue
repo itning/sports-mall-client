@@ -16,7 +16,7 @@
   import CarouselTwo from "../components/CarouselTwo";
   import LayoutSider from "../components/LayoutSider";
   import RecommendedProducts from "../components/RecommendedProducts";
-  import {Get} from "../http";
+  import {Get} from "@itning/axios-helper";
   import {API} from "../api";
 
   export default {

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import {Del, Get, Patch, Post} from "../http";
+  import {Delete, Get, Patch, Post} from "@itning/axios-helper";
   import {API} from "../api";
   import EditableCell from "../components/EditableCell";
 
@@ -79,7 +79,7 @@
           })
       },
       onDelete(key) {
-        Del(API.commodityType.del + key)
+        Delete(API.commodityType.del + key)
           .withSuccessCode(204)
           .withErrorStartMsg("删除失败：")
           .do(response => {
