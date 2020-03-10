@@ -66,7 +66,7 @@
           Patch(API.user.modify)
             .withSuccessCode(204)
             .withErrorStartMsg("修改地址失败：")
-            .withJSONData({address: this.address})
+            .withJson({address: this.address})
             .do(response => {
               this.$message.success('保存成功');
             })

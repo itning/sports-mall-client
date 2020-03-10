@@ -110,7 +110,7 @@
         Patch(API.carousel.modify)
           .withSuccessCode(204)
           .withErrorStartMsg("修改失败：")
-          .withJSONData(modifyObj)
+          .withJson(modifyObj)
           .do(response => {
             this.$message.success("修改成功");
           })

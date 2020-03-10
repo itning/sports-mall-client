@@ -70,7 +70,7 @@
         Patch(API.commodityType.modify)
           .withSuccessCode(204)
           .withErrorStartMsg("修改失败：")
-          .withJSONData({id: key, name: value})
+          .withJson({id: key, name: value})
           .do(response => {
             this.$message.success("修改成功");
           })

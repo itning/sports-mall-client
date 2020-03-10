@@ -117,7 +117,7 @@
         Patch(API.commodity.admin_modify)
           .withSuccessCode(204)
           .withErrorStartMsg("修改失败：")
-          .withJSONData(send)
+          .withJson(send)
           .do(response => {
             this.$message.success("修改成功");
           })
@@ -129,7 +129,7 @@
         Patch(API.commodity.admin_modify)
           .withSuccessCode(204)
           .withErrorStartMsg("下架失败：")
-          .withJSONData({id: id, takeOff: true})
+          .withJson({id: id, takeOff: true})
           .do(response => {
             this.$message.success("下架成功");
           })
@@ -175,7 +175,7 @@
         Patch(API.commodity.admin_modify)
           .withSuccessCode(204)
           .withErrorStartMsg("修改失败：")
-          .withJSONData({id: this.modify.modifyId, imgSecond: imgSecond})
+          .withJson({id: this.modify.modifyId, imgSecond: imgSecond})
           .do(response => {
             this.$message.success("修改轮播图成功");
             this.modify.visible = false;
@@ -187,7 +187,7 @@
         Patch(API.commodity.admin_modify_detail)
           .withSuccessCode(204)
           .withErrorStartMsg("修改详情失败：")
-          .withJSONData({id: this.modify.detailId, detail: this.modify.detail, commodity: {id: this.modify.modifyId}})
+          .withJson({id: this.modify.detailId, detail: this.modify.detail, commodity: {id: this.modify.modifyId}})
           .do(response => {
             this.$message.success("修改详情成功");
           })
