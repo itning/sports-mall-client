@@ -100,7 +100,7 @@
         Patch(API.user.modify)
           .withSuccessCode(204)
           .withErrorStartMsg(errorMsg)
-          .withJSONData(obj)
+          .withJson(obj)
           .do(response => {
             this.$message.success('保存成功');
           })
