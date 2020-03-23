@@ -1,32 +1,25 @@
 import {AxiosHelperConfig} from '@itning/axios-helper'
 import Vue from 'vue'
 import {LOCAL_STORAGE_KEY} from "../user";
+import HelpConfig from "@itning/axios-helper/dist/HelpConfig";
 
-let once = false;
-
-function showErrorToast(title, data) {
-  if (once) {
-    return;
-  }
-  let msg;
-  if (typeof data === "string") {
-    msg = data;
-  } else {
-    msg = data.msg;
-  }
-  Vue.prototype.$notification['error']({
-    message: title,
-    description: msg,
-    duration: 4.5,
-    onClose: () => {
-      once = false;
+HelpConfig.errorMsgImpl = {
+  showErrorToast(title, data) {
+    let msg;
+    if (typeof data === "string") {
+      msg = data;
+    } else {
+      msg = data.msg;
     }
-  });
-  once = true;
-}
-
-AxiosHelperConfig.errorMsgImpl = {
-  showErrorToast: showErrorToast
+    Vue.prototype.$notification.error({
+      message: title,
+      description: msg,
+      duration: 4.5,
+      onClose: () => {
+        HelpConfig.onceMsgFinish();
+      }
+    });
+  }
 };
 
 AxiosHelperConfig.axiosInstanceBuilder
@@ -54,7 +47,6 @@ AxiosHelperConfig.axiosInstanceBuilder
     },
     onRejected: error => {
       if (error.response === undefined) {
-        showErrorToast('网络异常', {msg: '请检查网络连接状态后再试'}, null);
         return Promise.reject(error);
       }
       if (error.response.status) {
@@ -63,8 +55,7 @@ AxiosHelperConfig.axiosInstanceBuilder
             setTimeout(() => {
               window.location.href = "/login";
             }, 2000);
-            showErrorToast("错误", error.response.data);
-            return;
+            break;
           case 403:
             console.warn('权限不足');
             break;

@@ -69,6 +69,7 @@
               .withSuccessCode(200)
               .withURLSearchParams(values)
               .withErrorStartMsg("登陆失败：")
+              .withOnceMsg()
               .do(response => {
                 console.log(response.data.data);
                 const roleId = analyze(response.data.data).role.id;
