@@ -1,8 +1,8 @@
 <template>
   <div style="height: 100%">
-    <a-locale-provider :locale="locale">
+    <a-config-provider :locale="locale">
       <router-view/>
-    </a-locale-provider>
+    </a-config-provider>
   </div>
 </template>
 

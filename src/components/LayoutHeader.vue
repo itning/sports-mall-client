@@ -62,7 +62,7 @@
   export default {
     name: "LayoutHeader",
     methods: {
-      handlePersonalBtnClick(){
+      handlePersonalBtnClick() {
         this.$router.push("/personal").catch(err => {
         });
       },
@@ -88,7 +88,7 @@
         });
       },
       searchProduct(value) {
-        if (value.trim() === "") {
+        if (!value || value.trim() === "" || value.trim().startsWith("\\")) {
           this.$router.push("/").catch(err => {
           });
           return;

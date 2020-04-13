@@ -24,7 +24,7 @@
           <a-button type="link" @click="handleModifyAddress">{{addressReadOnly?'修改':'保存'}}</a-button>
         </a-config-provider>
       </p>
-      <a-textarea placeholder="在此填写收货地址" autosize :read-only="addressReadOnly" ref="addressTextarea" v-model="address"/>
+      <a-textarea placeholder="在此填写收货地址" autoSize :read-only="addressReadOnly" ref="addressTextarea" v-model="address"/>
     </div>
     <div class="confirm-btn">
       <a-button type="primary" @click="handleOrder" :loading="loading.order">立即下单</a-button>

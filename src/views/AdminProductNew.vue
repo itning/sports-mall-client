@@ -56,6 +56,7 @@
           v-decorator="[
           'recommended',
           {
+            valuePropName: 'checked',
             rules: [
               {
                 required: true,
@@ -150,6 +151,7 @@
     data() {
       return {
         loading: false,
+        recommended: true,
         productType: [],
         formItemLayout: {
           labelCol: {
@@ -182,7 +184,7 @@
           if (!err) {
             console.log('Received values of form: ', values);
             this.loading = true;
-            Post(API.commodity.admin_add)
+            /*Post(API.commodity.admin_add)
               .withURLSearchParams(values)
               .withSuccessCode(201)
               .withErrorStartMsg("添加失败：")
@@ -193,7 +195,7 @@
               })
               .doAfter(() => {
                 this.loading = false;
-              })
+              })*/
           }
         });
       },

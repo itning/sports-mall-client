@@ -9,7 +9,7 @@
         </a-carousel>
       </a-col>
       <a-col :xs="0" :sm="6" :md="6" :lg="6" :xl="6">
-        <a-carousel effect="fade" vertical autoplay>
+        <a-carousel effect="fade" dotPosition="right" autoplay>
           <div v-for="item in verticalData" :key="item.id">
             <a :href="item.link"><img :src="item.url" alt="" class="carousel_vertical_img"></a>
           </div>
