@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@itning/axios-helper": "^1.0.7",
-    "ant-design-vue": "^1.5.4",
+    "ant-design-vue": "^1.5.5",
     "core-js": "^3.6.5",
     "js-base64": "^2.5.2",
     "moment": "^2.24.0",
