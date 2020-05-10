@@ -947,10 +947,10 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@itning/axios-helper@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.npm.taobao.org/@itning/axios-helper/download/@itning/axios-helper-1.0.7.tgz#344f6082cfc13d2cde2c9db0d8092ffd2657a260"
-  integrity sha1-NE9ggs/BPSzeLJ2w2Akv/SZXomA=
+"@itning/axios-helper@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@itning/axios-helper/download/@itning/axios-helper-1.1.0.tgz#57e19686c084137f7d3b02963a6327ccf7367a49"
+  integrity sha1-V+GWhsCEE399OwKWOmMnzPc2ekk=
   dependencies:
     axios "^0.19.2"
 
