@@ -1,9 +1,8 @@
 import {AxiosHelperConfig} from '@itning/axios-helper'
 import Vue from 'vue'
 import {LOCAL_STORAGE_KEY} from "../user";
-import HelpConfig from "@itning/axios-helper/dist/HelpConfig";
 
-HelpConfig.errorMsgImpl = {
+AxiosHelperConfig.errorMsgImpl = {
   showErrorToast(title, data) {
     let msg;
     if (typeof data === "string") {
@@ -16,7 +15,7 @@ HelpConfig.errorMsgImpl = {
       description: msg,
       duration: 4.5,
       onClose: () => {
-        HelpConfig.onceMsgFinish();
+        AxiosHelperConfig.onceMsgFinish();
       }
     });
   }
