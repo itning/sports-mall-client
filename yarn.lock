@@ -1525,10 +1525,10 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
 
-ant-design-vue@^1.5.5:
-  version "1.5.5"
-  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.5.5.tgz#11e5fabedfb6f51ccedb3f7b1650d5f388157eb3"
-  integrity sha1-EeX6vt+29RzO2z97FlDV84gVfrM=
+ant-design-vue@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npm.taobao.org/ant-design-vue/download/ant-design-vue-1.5.6.tgz#9aa64fd24b3c8845effb172dc8952aca51158d11"
+  integrity sha1-mqZP0ks8iEXv+xctyJUqylEVjRE=
   dependencies:
     "@ant-design/icons" "^2.1.1"
     "@ant-design/icons-vue" "^2.0.0"
