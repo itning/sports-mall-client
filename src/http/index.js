@@ -56,6 +56,9 @@ AxiosHelperConfig.axiosInstanceBuilder
             }, 2000);
             break;
           case 403:
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 2000);
             console.warn('权限不足');
             break;
           case 404:

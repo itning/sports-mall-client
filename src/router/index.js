@@ -82,7 +82,7 @@ const routes = [
     component: AdminIndex,
     children: [
       {
-        path:'',
+        path: '',
         redirect: 'product'
       },
       {
@@ -145,6 +145,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  if (to.path === "/login" ||
+    to.path === "/reg" ||
+    to.path === "/" ||
+    to.path === '/forget_pwd') {
+    next();
+    return;
+  }
   if (to.path.startsWith("/admin")) {
     if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
       next("/login");
@@ -157,21 +164,7 @@ router.beforeEach((to, from, next) => {
     }
     return;
   }
-  if (localStorage.getItem(LOCAL_STORAGE_KEY) && User.loginUser().role.id === '1') {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-  }
-  if (to.path === "/login" ||
-    to.path === "/reg" ||
-    to.path === "/" ||
-    to.path === '/forget_pwd') {
-    next();
-    return;
-  }
-  if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
-    next("/login");
-  } else {
-    next();
-  }
+  next();
 });
 
 router.afterEach((to, from) => {

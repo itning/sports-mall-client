@@ -79,7 +79,7 @@
                 } else {
                   window.localStorage.setItem(LOCAL_STORAGE_KEY, response.data.data);
                   let location = this.$store.state.now_path;
-                  if (location === "") {
+                  if (location === "" || location.startsWith('/admin')) {
                     location = window.location.protocol + '//' + window.location.host;
                   }
                   window.location.href = location;
