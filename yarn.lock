@@ -1189,10 +1189,10 @@
     lodash.kebabcase "^4.1.1"
     svg-tags "^1.0.0"
 
-"@vue/babel-preset-app@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/babel-preset-app/download/@vue/babel-preset-app-4.4.1.tgz#97c6796183cd0abf96a17297dc335c4c702fd8c4"
-  integrity sha1-l8Z5YYPNCr+WoXKX3DNcTHAv2MQ=
+"@vue/babel-preset-app@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/babel-preset-app/download/@vue/babel-preset-app-4.4.4.tgz?cache=0&sync_timestamp=1591967129919&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fbabel-preset-app%2Fdownload%2F%40vue%2Fbabel-preset-app-4.4.4.tgz#e40929ca89ea3d547ea20cf0a15c222c9ad1ba38"
+  integrity sha1-5AkpyonqPVR+ogzwoVwiLJrRujg=
   dependencies:
     "@babel/core" "^7.9.6"
     "@babel/helper-compilation-targets" "^7.9.6"
@@ -1257,48 +1257,48 @@
     "@vue/babel-plugin-transform-vue-jsx" "^1.1.2"
     camelcase "^5.0.0"
 
-"@vue/cli-overlay@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-overlay/download/@vue/cli-overlay-4.4.1.tgz#f1f51f31f7a00d371e9a5b5a941525184475bf8b"
-  integrity sha1-8fUfMfegDTcemltalBUlGER1v4s=
+"@vue/cli-overlay@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-overlay/download/@vue/cli-overlay-4.4.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-overlay%2Fdownload%2F%40vue%2Fcli-overlay-4.4.4.tgz#43268a8cdcd3ad741dfa51006b576064fbbe6e8e"
+  integrity sha1-QyaKjNzTrXQd+lEAa1dgZPu+bo4=
 
-"@vue/cli-plugin-babel@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-babel/download/@vue/cli-plugin-babel-4.4.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-babel%2Fdownload%2F%40vue%2Fcli-plugin-babel-4.4.1.tgz#2c6e969fe51f1b4b211bea84afb7cad18240f70f"
-  integrity sha1-LG6Wn+UfG0shG+qEr7fK0YJA9w8=
+"@vue/cli-plugin-babel@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-babel/download/@vue/cli-plugin-babel-4.4.4.tgz?cache=0&sync_timestamp=1591967129567&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-babel%2Fdownload%2F%40vue%2Fcli-plugin-babel-4.4.4.tgz#18904b5e38173291b37054c2f0393fb8c748f37b"
+  integrity sha1-GJBLXjgXMpGzcFTC8Dk/uMdI83s=
   dependencies:
     "@babel/core" "^7.9.6"
-    "@vue/babel-preset-app" "^4.4.1"
-    "@vue/cli-shared-utils" "^4.4.1"
+    "@vue/babel-preset-app" "^4.4.4"
+    "@vue/cli-shared-utils" "^4.4.4"
     babel-loader "^8.1.0"
     cache-loader "^4.1.0"
     thread-loader "^2.1.3"
     webpack "^4.0.0"
 
-"@vue/cli-plugin-router@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-router/download/@vue/cli-plugin-router-4.4.1.tgz#07d09df0f4bea816e637da814f578b808f1f93b2"
-  integrity sha1-B9Cd8PS+qBbmN9qBT1eLgI8fk7I=
+"@vue/cli-plugin-router@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-router/download/@vue/cli-plugin-router-4.4.4.tgz#59e11dd55df854618616ad4f013b20c52e4a3a68"
+  integrity sha1-WeEd1V34VGGGFq1PATsgxS5KOmg=
   dependencies:
-    "@vue/cli-shared-utils" "^4.4.1"
+    "@vue/cli-shared-utils" "^4.4.4"
 
-"@vue/cli-plugin-vuex@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.4.1.tgz#98d18fc5d36fa6e0d1fc2ecaeea37aa965564f19"
-  integrity sha1-mNGPxdNvpuDR/C7K7qN6qWVWTxk=
+"@vue/cli-plugin-vuex@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.4.4.tgz#42328c161978823a1eac97a07832a7aa225cbb9b"
+  integrity sha1-QjKMFhl4gjoerJegeDKnqiJcu5s=
 
-"@vue/cli-service@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-service/download/@vue/cli-service-4.4.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-service%2Fdownload%2F%40vue%2Fcli-service-4.4.1.tgz#b26a435d8c953bc7efaf7b784c9835c1415bcf1c"
-  integrity sha1-smpDXYyVO8fvr3t4TJg1wUFbzxw=
+"@vue/cli-service@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-service/download/@vue/cli-service-4.4.4.tgz#256c990e49a2ff8dc533b773c504a65435c75c4c"
+  integrity sha1-JWyZDkmi/43FM7dzxQSmVDXHXEw=
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
     "@soda/friendly-errors-webpack-plugin" "^1.7.1"
     "@soda/get-current-script" "^1.0.0"
-    "@vue/cli-overlay" "^4.4.1"
-    "@vue/cli-plugin-router" "^4.4.1"
-    "@vue/cli-plugin-vuex" "^4.4.1"
-    "@vue/cli-shared-utils" "^4.4.1"
+    "@vue/cli-overlay" "^4.4.4"
+    "@vue/cli-plugin-router" "^4.4.4"
+    "@vue/cli-plugin-vuex" "^4.4.4"
+    "@vue/cli-shared-utils" "^4.4.4"
     "@vue/component-compiler-utils" "^3.1.2"
     "@vue/preload-webpack-plugin" "^1.1.0"
     "@vue/web-component-wrapper" "^1.2.0"
@@ -1345,10 +1345,10 @@
     webpack-dev-server "^3.11.0"
     webpack-merge "^4.2.2"
 
-"@vue/cli-shared-utils@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/@vue/cli-shared-utils/download/@vue/cli-shared-utils-4.4.1.tgz#930304ade5a9f9bf0d2fd67d9305cad83d04aae1"
-  integrity sha1-kwMEreWp+b8NL9Z9kwXK2D0EquE=
+"@vue/cli-shared-utils@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.npm.taobao.org/@vue/cli-shared-utils/download/@vue/cli-shared-utils-4.4.4.tgz?cache=0&sync_timestamp=1591967126772&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-shared-utils%2Fdownload%2F%40vue%2Fcli-shared-utils-4.4.4.tgz#b9685b73a604c8a7ee82d6fc3319fe7bb2cdb274"
+  integrity sha1-uWhbc6YEyKfugtb8Mxn+e7LNsnQ=
   dependencies:
     "@hapi/joi" "^15.0.1"
     chalk "^2.4.2"
@@ -4928,10 +4928,10 @@ less-loader@^5.0.0:
     loader-utils "^1.1.0"
     pify "^4.0.1"
 
-less@^3.11.2:
-  version "3.11.2"
-  resolved "https://registry.npm.taobao.org/less/download/less-3.11.2.tgz#51a484e9017287f5ac3db921cb86970eb7506e81"
-  integrity sha1-UaSE6QFyh/WsPbkhy4aXDrdQboE=
+less@^3.11.3:
+  version "3.11.3"
+  resolved "https://registry.npm.taobao.org/less/download/less-3.11.3.tgz#2d853954fcfe0169a8af869620bcaa16563dcc1c"
+  integrity sha1-LYU5VPz+AWmor4aWILyqFlY9zBw=
   dependencies:
     clone "^2.1.2"
     tslib "^1.10.0"
@@ -5370,10 +5370,10 @@ moment@^2.21.0:
   resolved "https://registry.npm.taobao.org/moment/download/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha1-DQVdU/UFKqZTyfbraLtdEr9cK1s=
 
-moment@^2.26.0:
-  version "2.26.0"
-  resolved "https://registry.npm.taobao.org/moment/download/moment-2.26.0.tgz?cache=0&sync_timestamp=1589957264644&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmoment%2Fdownload%2Fmoment-2.26.0.tgz#5e1f82c6bafca6e83e808b30c8705eed0dcbd39a"
-  integrity sha1-Xh+Cxrr8pug+gIswyHBe7Q3L05o=
+moment@^2.27.0:
+  version "2.27.0"
+  resolved "https://registry.npm.taobao.org/moment/download/moment-2.27.0.tgz?cache=0&sync_timestamp=1592524041169&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmoment%2Fdownload%2Fmoment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+  integrity sha1-i/9OPiaiNiIN/j423nVrbrqgEF0=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -8090,10 +8090,10 @@ vue-ref@^2.0.0:
   resolved "https://registry.npm.taobao.org/vue-ref/download/vue-ref-2.0.0.tgz#483084d732abed11da796778a8266a3af0ea1a9c"
   integrity sha1-SDCE1zKr7RHaeWd4qCZqOvDqGpw=
 
-vue-router@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.2.0.tgz#da35195ffe37fdf0bec9f5f8f72781d2a7718815"
-  integrity sha1-2jUZX/43/fC+yfX49yeB0qdxiBU=
+vue-router@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.3.4.tgz?cache=0&sync_timestamp=1592477010355&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"
+  integrity sha1-Tjirw0oRxBtsPYJERJouNjumJQs=
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
